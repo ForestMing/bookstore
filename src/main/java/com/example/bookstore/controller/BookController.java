@@ -8,7 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -29,14 +34,33 @@ public class BookController {
     }
 
     //按类型查找图书
-    @RequestMapping(value = "/findByType" ,method = RequestMethod.POST)
-    public String findByType(@ModelAttribute String type, Model model){
-        List<Book> bookList = bookService.selectBookByTypeName(type);
-        model.addAttribute("books",bookList);
-        return "result";
+    @RequestMapping(value="findByType")
+    public @ResponseBody List<Book>
+     findBookByType(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        System.out.println(request.getParameter("type"));
+        List<Book> books = bookService.selectBookByTypeName(request.getParameter("type"));
+        System.out.println(books);
+        return books ;
     }
 
     //按书名查找图书
+    @RequestMapping(value="findByName")
+    public @ResponseBody List<Book>
+    findBookByName(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        System.out.println(request.getParameter("name"));
+        List<Book> books = bookService.selectBookByName(request.getParameter("name"));
+        System.out.println(books);
+        return books ;
+    }
+
+
+
+
+
+
+  /*  //按书名查找图书(不使用ajax）
     @RequestMapping(value = "/findByName" ,method = RequestMethod.POST)
     public String findByName(@ModelAttribute(value="book") Book book,Model model) {
         System.out.println(book.getBookname());
@@ -45,4 +69,5 @@ public class BookController {
         System.out.println("BookController 发送");
         return "index";
     }
+    */
 }
