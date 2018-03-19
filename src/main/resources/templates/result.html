@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<div class="post-list" th:if="${not #lists.isEmpty(books)}"> <!--书本表单-->
+    <div class="post-list-item" th:each="books:${book}"> <!--书本项-->
+        <div class="col-xs-4">
+            <img class="post-object" src="${bookpic}"/>
+        </div>
+        <div class="col-xs-8">
+            <a href="news.html">
+                <div class="post-heading" th:text="${bookname}"></div>
+            </a>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur aut doloribus optio
+                eligendi id expedita recusandae...</p> -->
+            <p class="text-muted">
+                            <span>
+                                7分钟前
+                            </span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

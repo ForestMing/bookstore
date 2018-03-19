@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bookstore.mapper.PersonMapper">
+  <resultMap id="PersonResultMap" type="com.example.bookstore.entity.Person">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="person_Column_List">
+    id, name
+  </sql>
+
+  <insert id="insert" parameterType="com.example.bookstore.entity.Person">
+    insert into person (id, name)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+  </insert>
+
+</mapper>

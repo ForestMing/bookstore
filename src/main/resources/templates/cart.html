@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>森林书城-购物车</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/main.css"/>
+    <script src="/bootstrap-3.3.7-dist/js/test.js" type="text/javascript"></script>
+    <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+<!--导航栏-->
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="index" class="navbar-brand"></a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="index">主页-书城</a></li>
+            <li><a href="rankingList">排行榜</a></li>
+            <li><a href="community">社区</a></li>
+            <li class="active"><a href="cart">购物车</a></li>
+            <li><a href="orders">我的订单</a></li>
+            <li><a href="userCenter">个人中心</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="login">登录</a></li>
+            <li><a href="signup">注册</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--固定宽度，支持响应式布局的容器-->
+<div class="container">
+    <!--网格布局,12列分配-->
+    <div class="row">
+        <!--left导航-->
+        <div class="col-sm-2">
+
+        </div>
+        <!--middle内容-->
+        <div class="col-sm-7">
+
+        </div>
+        <!--right右框-->
+        <div class="col-sm-3">
+            <div class="form-group">
+                <input type="search" class="form-control" placeholder="搜索书名/作者"/>
+            </div>
+            <div class="side-bar-well clearfix">
+                <div class="col-sm-5"><img src="/img/1-1.png"/></div>
+                <div class="col-sm-7">
+                    <p class="side-bar-well-title">
+                        网上有害信息举报专区
+                    </p>
+                    <p>举报电话：12315</p>
+                </div>
+            </div>
+            <div class="side-bar-well">
+                <strong class="side-bar-well-title">
+                    很多人都在关注
+                </strong>
+                <a href="#" class="news-item">
+                    <div class="news-title">Consectetur adipisicing elit. Consequuntur aut</div>
+                    <div class="news-info">
+                        5.9万次播放 ⋅ 167评论
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.bookstore.mapper.OrderMapper" >
+  <resultMap id="OrderResultMap" type="com.example.bookstore.entity.Order" >
+    <id column="OrderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="Id" property="id" jdbcType="INTEGER" />
+    <result column="CustomerId" property="customerid" jdbcType="INTEGER" />
+    <result column="Orderdate" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="Ordermount" property="ordermount" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="postmethod" property="postmethod" jdbcType="VARCHAR" />
+    <result column="paymethod" property="paymethod" jdbcType="VARCHAR" />
+    <result column="recevername" property="recevername" jdbcType="VARCHAR" />
+    <result column="receveraddr" property="receveraddr" jdbcType="VARCHAR" />
+    <result column="recevertel" property="recevertel" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="totalprice" property="totalprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Order_Column_List" >
+    OrderId, Id, CustomerId, Orderdate, Ordermount, message, postmethod, paymethod, recevername, 
+    receveraddr, recevertel, memo, totalprice
+  </sql>
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.bookstore.mapper.OrderDetailMapper" >
+  <resultMap id="OrderDetailResultMap" type="com.example.bookstore.entity.OrderDetail" >
+    <id column="OrderDetailId" property="orderdetailid" jdbcType="INTEGER" />
+    <result column="Id" property="id" jdbcType="INTEGER" />
+    <result column="OrderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="BookId" property="bookid" jdbcType="INTEGER" />
+    <result column="ordermount" property="ordermount" jdbcType="INTEGER" />
+    <result column="poststatus" property="poststatus" jdbcType="VARCHAR" />
+    <result column="Recevstatus" property="recevstatus" jdbcType="VARCHAR" />
+    <result column="sigletotalprice" property="sigletotalprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="OrderDetail_Column_List" >
+    OrderDetailId, Id, OrderId, BookId, ordermount, poststatus, Recevstatus, sigletotalprice
+  </sql>
+
+</mapper>

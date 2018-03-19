@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.bookstore.mapper.BookMapper" >
+  <resultMap id="BookResultMap" type="com.example.bookstore.entity.Book" >
+    <id column="BookId" property="bookid" jdbcType="INTEGER" />
+    <result column="BookName" property="bookname" jdbcType="VARCHAR" />
+    <result column="BookPress" property="bookpress" jdbcType="VARCHAR" />
+    <result column="BookPubDate" property="bookpubdate" jdbcType="TIMESTAMP" />
+    <result column="BookSize" property="booksize" jdbcType="DOUBLE" />
+    <result column="BookVersion" property="bookversion" jdbcType="VARCHAR" />
+    <result column="BookAuthor" property="bookauthor" jdbcType="VARCHAR" />
+    <result column="BookTanslor" property="booktanslor" jdbcType="VARCHAR" />
+    <result column="Bookisbn" property="bookisbn" jdbcType="VARCHAR" />
+    <result column="BookPages" property="bookpages" jdbcType="INTEGER" />
+    <result column="BookPrprice" property="bookprprice" jdbcType="DECIMAL" />
+    <result column="BookDealmount" property="bookdealmount" jdbcType="INTEGER" />
+    <result column="BookLookmount" property="booklookmount" jdbcType="INTEGER" />
+    <result column="BookDiscount" property="bookdiscount" jdbcType="DECIMAL" />
+    <result column="BookPic" property="bookpic" jdbcType="VARCHAR" />
+    <result column="BookStoremount" property="bookstoremount" jdbcType="INTEGER" />
+    <result column="BookStoretime" property="bookstoretime" jdbcType="TIMESTAMP" />
+    <result column="BookPackstyle" property="bookpackstyle" jdbcType="VARCHAR" />
+    <association property="booktype" javaType="BookType">
+      <id column="BookTypeId" property="booktypeid" jdbcType="INTEGER"/>
+      <result column="BookTypeName" property="booktypename" jdbcType="VARCHAR"/>
+    </association>
+  </resultMap>
+  <sql id="Bookinfo_Column_List" >
+    BookId, BookTypeId, BookName, BookPress, BookPubDate, BookSize, BookVersion, BookAuthor, 
+    BookTanslor, Bookisbn, BookPages, BookPrprice, BookDealmount, BookLookmount, BookDiscount, 
+    BookPic, BookStoremount, BookStoretime, BookPackstyle
+  </sql>
+  
+  <select id="selectBookByTypename" parameterType="String" resultMap="BookResultMap">
+    select *
+    from tb_bookinfo bi
+    where bi.BookTypeId = (select bti.BookTypeId
+                            from tb_booktypeinfo bti
+                            where bti.BookTypeName = #{type,jdbcType=VARCHAR} )
+  </select>
+
+  <select id="selectBookByName" parameterType="String" resultMap="BookResultMap">
+    select *
+    from tb_bookinfo tb_b
+    where tb_b.BookName LIKE  concat(concat('%',#{name}),'%')
+  </select>
+  
+</mapper>

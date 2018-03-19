@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.bookstore.mapper.ParameterMapper" >
+  <resultMap id="ParameterResultMap" type="com.example.bookstore.entity.Parameter" >
+    <id column="webname" property="webname" jdbcType="VARCHAR" />
+    <result column="regtiaoyue" property="regtiaoyue" jdbcType="VARCHAR" />
+    <result column="notice" property="notice" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="weblogo" property="weblogo" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="affordmethod" property="affordmethod" jdbcType="VARCHAR" />
+    <result column="shopstream" property="shopstream" jdbcType="VARCHAR" />
+    <result column="postmethod" property="postmethod" jdbcType="VARCHAR" />
+    <result column="postprice" property="postprice" jdbcType="DECIMAL" />
+    <result column="Postdescp" property="postdescp" jdbcType="VARCHAR" />
+    <result column="worktime" property="worktime" jdbcType="TIMESTAMP" />
+    <result column="service" property="service" jdbcType="VARCHAR" />
+    <result column="law" property="law" jdbcType="VARCHAR" />
+    <result column="commques" property="commques" jdbcType="VARCHAR" />
+    <result column="dealrule" property="dealrule" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Parameter_Column_List" >
+    webname, regtiaoyue, notice, address, postcode, tel, copyright, weblogo, website, 
+    affordmethod, shopstream, postmethod, postprice, Postdescp, worktime, service, law, 
+    commques, dealrule
+  </sql>
+
+</mapper>
