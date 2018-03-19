@@ -257,15 +257,14 @@
         </div>
         <!--middle内容 ，展示搜索结果-->
         <div class="col-sm-7"><!--书本展示区 -->
-            <div class="post-list" th:if="${not #lists.isEmpty(books)}"> <!--书本表单-->
-                <div class="post-list-item" th:each="books:${book}"> <!--书本项-->
+            <div class="post-list" > <!--书本表单-->
+                <div class="post-list-item" th:each="book,bookStats : ${books}"> <!--书本项-->
                     <div class="col-xs-4">
-                        <img class="post-object" src="${book.BookPic}"/>
-
+                        <img class="post-object" src="/img/${book.bookpic}"/>
                     </div>
                     <div class="col-xs-8">
                         <a href="news.html">
-                            <div class="post-heading" th:text="${book.BookName}"></div>
+                            <div class="post-heading" th:text="${book.bookname}"></div>
                         </a>
                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur aut doloribus optio
                             eligendi id expedita recusandae...</p> -->
@@ -283,7 +282,7 @@
             <div class="form-group">
                 <form id = "searchForm" action="#" th:action="@{/findByName}" th:object="${book}" method="post">
                     <input id="condi1" type="text" class="form-control" placeholder="搜索书名" th:field="*{bookname}"/>
-                    <input id="findButton" type="submit" class="btn btn-primary" onclick="findByNameJs()"/>
+                    <input id="findButton" type="button" value="查找" class="btn btn-primary"/>
                     <input id="reset" type="reset" class="btn btn-primary"/>
                 </form>
             </div>
@@ -311,6 +310,7 @@
     </div>
 </div>
 <script th:line="javascript">
+    /*左下拉框特效*/
     $(function () {
         $(".panel-heading").click(function (e) {
             /*切换折叠指示图标*/
@@ -319,10 +319,16 @@
         });
     });
 
-    $(function findByNameJs() {
-        alert('搜索书名');
-        $.getElementById("searchForm").submit();
-    })
+    /*id选择器提交搜索条件表单*/
+    $(function () {
+        $("#findButton").click(function (e) {
+            /*id选择器点击事件，提交查询条件*/
+            alert('搜索书名');
+            $('#searchForm').submit();
+        });
+    });
+
+
 
 </script>
 </body>

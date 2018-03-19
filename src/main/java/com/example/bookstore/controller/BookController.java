@@ -43,6 +43,6 @@ public class BookController {
         List<Book> books = bookService.selectBookByName(book.getBookname());
         model.addAttribute("books",books);
         System.out.println("BookController 发送");
-        return "result";
+        return "index";
     }
 }

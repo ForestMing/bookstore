@@ -41,6 +41,31 @@ public class Book {
 
     private String bookpackstyle;
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookid=" + bookid +
+                ", booktype=" + booktype +
+                ", bookname='" + bookname + '\'' +
+                ", bookpress='" + bookpress + '\'' +
+                ", bookpubdate=" + bookpubdate +
+                ", booksize=" + booksize +
+                ", bookversion='" + bookversion + '\'' +
+                ", bookauthor='" + bookauthor + '\'' +
+                ", booktanslor='" + booktanslor + '\'' +
+                ", bookisbn='" + bookisbn + '\'' +
+                ", bookpages=" + bookpages +
+                ", bookprprice=" + bookprprice +
+                ", bookdealmount=" + bookdealmount +
+                ", booklookmount=" + booklookmount +
+                ", bookdiscount=" + bookdiscount +
+                ", bookpic='" + bookpic + '\'' +
+                ", bookstoremount=" + bookstoremount +
+                ", bookstoretime=" + bookstoretime +
+                ", bookpackstyle='" + bookpackstyle + '\'' +
+                '}';
+    }
+
     public Integer getBookid() {
         return bookid;
     }
