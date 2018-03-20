@@ -257,8 +257,8 @@
         </div>
         <!--middle内容 ，展示搜索结果-->
         <div class="col-sm-7"><!--书本展示区 -->
-            <div id="showBooks" class="post-list"> <!--书本表单-->
-                <div class="post-list-item" th:each="book,bookStats : ${books}"> <!--书本项-->
+            <div id="showBooks" class="post-list" > <!--书本表单-->
+                <div class="post-list-item" th:each="book:${books}"> <!--书本项-->
                     <div class="col-xs-4">
                         <img class="post-object" th:src="${book.bookpic}"/>
                     </div>
@@ -266,11 +266,7 @@
                         <a href="news.html">
                             <div class="post-heading" th:text="${book.bookname}"></div>
                         </a>
-
                         <p class="text-muted">
-                            <span>
-                                7分钟前
-                            </span>
                         </p>
                     </div>
                 </div>
@@ -318,24 +314,29 @@
         });
     });
 
+    //按书名查找
     $(function () {
         $("#findButton").click(function (e) {
             /*id选择器点击事件，提交查询条件*/
             var name = $( "input[name = 'condi1']").val();
+            var div = $("#showBooks");
             alert('搜索书名'+name);
             $.ajax({
                 url: "findByName",
                 data: {"name": name},
                 type: "post",
-                dataType: "json",
+                dataType: "html ",
                 success: function (data) {
                     alert('FindByName success!');
+                    alert(data);
+                    div.html(data);
+                    alert('div flash');
                 }
             });
         });
     });
 
-    //获取<span>标签内置文本，便于对图书分类显示
+    //获取<span>标签内置文本，显示同类书
     $(function () {
         $(".glyphicon-triangle-right").click(function (e) {
          //   alert(this.innerHTML);
@@ -347,11 +348,15 @@
             $.ajax({
                 url: "findByType",
                 data: {"type": typeName},
-                type: "post",
-                dataType: "json",
+                type: "POST",
+                dataType: "html",
                 success: function (data) {
                     alert('FindByType success!');
-                }
+                    alert(data);
+                    $("#showBooks").html(data);
+                    alert('div flash');
+                },
+                error:function(error){alert(error);}
             });
         });
     });
