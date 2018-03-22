@@ -130,7 +130,7 @@
         </div>
         <div class="col-sm-3" style="margin-top: 8px">
             <div class="form-group">
-                <form id="searchForm" action="findByName" method="post">
+                <form id="searchForm" action="" method="post">
                     <input id="condi1" name="condi1" type="text" class="form-control" placeholder="搜索书名" />
                     <input id="findButton" type="button" value="查找" class="btn btn-default" />
                     <input id="reset" type="reset" class="btn btn-default"/>
@@ -215,22 +215,21 @@
     © 2018 森林书城-网罗万象 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备
 </div>
 <script th:line="javascript">
+
     //按书名查找
     $(function () {
         $("#findButton").click(function (e) {
             /*id选择器点击事件，提交查询条件*/
             var name = $( "input[name = 'condi1']").val();
-            var div = $("#showBooks");
-            alert('搜索书名'+name);
+            console.log('搜索书名'+name);
             $.ajax({
                 url: "findByName",
                 data: {"name": name},
                 type: "post",
                 success: function (data) {
-                    alert('FindByName success!');
-                    alert(data);
-                    div.html(data);
-                    alert('div flash');
+                    console.log('FindByName success!');
+                    $("#showBooks").html(data);
+                    console.log('div flash');
                 }
             });
         });
@@ -248,10 +247,9 @@
                 data: {"type": typeName},
                 type: "POST",
                 success: function (data) {
-                    alert('FindByType success!');
-                    alert(data);
+                    console.log('FindByType success!');
                     $("#showBooks").html(data);
-                    alert('div flash');
+                    console.log('div flash');
 
                 },
                 error:function(error){alert(error);}

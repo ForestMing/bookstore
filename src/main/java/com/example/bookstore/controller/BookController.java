@@ -46,13 +46,14 @@ public class BookController {
 
     //按书名查找图书
     @RequestMapping(value="findByName")
-    public @ResponseBody List<Book>
-    findBookByName(HttpServletRequest request, HttpServletResponse response) throws IOException
-    {
-        System.out.println(request.getParameter("name"));
-        List<Book> books = bookService.selectBookByName(request.getParameter("name"));
-        System.out.println(books);
-        return books ;
+    public ModelAndView findByName(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String name = request.getParameter("name") ;
+        System.out.println("findByName"+name);
+        List<Book> books = bookService.selectBookByName(name);
+        System.out.println("查到book："+books);
+        ModelAndView modelAndView = new ModelAndView("result");
+        modelAndView.addObject("books",books);
+        return modelAndView ;
     }
 
 
