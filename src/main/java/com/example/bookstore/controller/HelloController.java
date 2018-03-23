@@ -16,15 +16,6 @@ public class HelloController {
         return "/community";
     }
 
-    @RequestMapping("/login")
-    public String login() {
-        return "/login";
-    }
-
-    @RequestMapping("/signup")
-    public String signup() {
-        return "/signup";
-    }
 
     @RequestMapping("/userCenter")
     public String userCenter() {

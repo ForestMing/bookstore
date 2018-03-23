@@ -36,24 +36,48 @@
 <div class="container">
   <div class="form-container">
     <h1>登录 <small>没有账号？<a href="signup">注册</a></small></h1>
-    <form>
+
+    <form id="loginform" th:action="@{/loginAction}" method="post" th:object="${customer} ">
       <div class="form-group">
         <label>用户名/手机/邮箱</label>
-        <input type="text" class="form-control"/>
+          <label>&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
+          </label>
+          <label th:text="${errorInfo}" style="color: red"></label>
+        <input type="text" class="form-control" th:field="*{customername}" th:value="${account}"/>
       </div>
       <div class="form-group">
         <label>密码</label>
-        <input type="password" class="form-control"/>
+        <input type="password" class="form-control" th:field="*{customerpwd}"/>
       </div>
       <p>忘记密码？</p>
       <div class="form-group">
-        <button class="btn btn-primary btn-block">登录</button>
+        <button id="loginbtn" class="btn btn-primary btn-block">登录</button>
       </div>
     </form>
+
   </div>
 </div>
 <div class="footer">
   © 2018 森林书城-网罗万象 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备
 </div>
+
+<script th:inline="javascript">
+    $(function () {
+        $("#loginbtn").click(function (e) {
+            if(checkVaild()){
+                $("#loginform").submit();
+            }
+        });
+    });
+
+    function checkVaild() {
+        var f = document.forms[0];
+        //验证数据，做css特效提示
+
+
+        return true;
+
+    }
+</script>
 </body>
 </html>

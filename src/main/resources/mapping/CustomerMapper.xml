@@ -21,5 +21,22 @@
     CustomerEmail, CustomerAddr, CustomerRegTime, CustomerQues, CustomerAnswer, CustomerLogTime, 
     CustomerLastLogT
   </sql>
+  <select id="selectExistCusName" parameterType="String" resultType="int">
+    SELECT COUNT(*)
+    FROM tb_customerinfo tb_ci
+    WHERE tb_ci.CustomerName = #{cusname,jdbcType=VARCHAR}
+  </select>
+  <insert id="insertCus" parameterType="com.example.bookstore.entity.Customer" >
+   INSERT INTO tb_customerinfo
+    (tb_customerinfo.CustomerName,tb_customerinfo.CustomerPwd,
+    tb_customerinfo.CustomerRegTime,tb_customerinfo.CustomerLastLogT)
+    VALUES(#{customername},#{customerpwd},(SELECT CURRENT_TIMESTAMP()),(SELECT CURRENT_TIMESTAMP()))
+  </insert>
+  
+  <select id="checkCnameAndCpwd" parameterType="com.example.bookstore.entity.Customer" resultType="int">
+    select count(*)
+      from tb_customerinfo cus
+        where cus.CustomerName = #{customername} and cus.CustomerPwd=#{customerpwd}
+  </select>
 
 </mapper>
