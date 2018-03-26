@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,8 +22,11 @@ public class BookController {
     private BookService bookService ;
 
     @RequestMapping(value="/index", method= RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Model model,HttpSession session) {
         model.addAttribute("book",new Book());
+        String name = (String) session.getAttribute("loginname");
+        System.out.println("inden收到login用户："+name);
+        model.addAttribute("username",name);
         return "index" ;
     }
 
