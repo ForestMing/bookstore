@@ -8,4 +8,8 @@ public interface BookService {
     List<Book> selectBookByTypeName (String type);
 
     List<Book> selectBookByName(String name );
+
+    List<Book> selectPopularBooks();
+
+    Book selectBookById(int bookId);
 }

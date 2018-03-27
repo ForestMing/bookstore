@@ -9,4 +9,8 @@ public interface BookMapper {
     List<Book> selectBookByTypename(String type) ;
 
     List<Book> selectBookByName(String name ) ;
+
+    List<Book> selectPopularBooks();
+
+    Book selectBookById(int bookId) ;
 }

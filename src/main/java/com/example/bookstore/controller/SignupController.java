@@ -36,6 +36,8 @@ public class SignupController {
             flag = customerService.insertCus(c);
             if (flag == 1) {
                 model.addAttribute("account",c.getCustomername());
+                String info = "恭喜您注册成功！开始登陆吧！";
+                model.addAttribute("info",info);
                 return "login";
             } else {
                 return "redirect:error";

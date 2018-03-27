@@ -11,4 +11,10 @@
     AdminId, AdminName, AdminPwd, AdminFlag
   </sql>
 
+  <select id="loginManager" parameterType="com.example.bookstore.entity.Manager" resultType="int">
+    SELECT count(*)
+        from tb_manager m
+        where m.AdminName = #{adminname} and m.AdminPwd = #{adminpwd}
+  </select>
+
 </mapper>

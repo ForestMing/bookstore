@@ -23,4 +23,15 @@ public class BookServiceImpl implements BookService {
 
         return bookMapper.selectBookByName(name);
     }
+
+    @Override
+    public List<Book> selectPopularBooks() {
+        return  bookMapper.selectPopularBooks();
+    }
+
+    @Override
+    public Book selectBookById(int bookId) {
+       return bookMapper.selectBookById(bookId);
+    }
+
 }

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
+    @RequestMapping("/details")
+    public String details(){
+        return "/details" ;
+    }
+
     @RequestMapping("/community")
     public String community() {
         return "/community";

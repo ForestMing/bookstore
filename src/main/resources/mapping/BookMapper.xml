@@ -42,7 +42,18 @@
   <select id="selectBookByName" parameterType="String" resultMap="BookResultMap">
     select *
     from tb_bookinfo tb_b
-    where tb_b.BookName LIKE  concat(concat('%',#{name}),'%')
+    where 1=1 AND tb_b.BookName LIKE  concat(concat('%',#{name}),'%')
   </select>
-  
+
+  <select id="selectPopularBooks" resultMap="BookResultMap">
+      select *
+      from tb_bookinfo b
+      where b.BookLookmount > 0 ;
+  </select>
+
+  <select id="selectBookById" parameterType="int" resultMap="BookResultMap">
+    SELECT *
+    from tb_bookinfo b
+    where b.BookId = #{bookId} ;
+  </select>
 </mapper>

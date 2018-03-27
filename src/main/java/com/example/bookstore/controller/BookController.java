@@ -24,9 +24,13 @@ public class BookController {
     @RequestMapping(value="/index", method= RequestMethod.GET)
     public String index(Model model,HttpSession session) {
         model.addAttribute("book",new Book());
+        //判断用户登陆状态
         String name = (String) session.getAttribute("loginname");
         System.out.println("inden收到login用户："+name);
         model.addAttribute("username",name);
+        //按浏览量自动推送
+        List<Book> popbooks = bookService.selectPopularBooks();
+        model.addAttribute("popbooks",popbooks);
         return "index" ;
     }
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>登录 - 森林书城</title>
+    <title>用户登录 - 森林书城</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -42,6 +42,7 @@
         <label>用户名/手机/邮箱</label>
           <label>&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
           </label>
+          <label th:text="${info}" style="color: green"></label>
           <label th:text="${errorInfo}" style="color: red"></label>
         <input type="text" class="form-control" th:field="*{customername}" th:value="${account}"/>
       </div>
