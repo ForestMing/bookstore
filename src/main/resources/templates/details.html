@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,19 +38,19 @@
     <div class="row">
         <!--图书图片展示区-->
         <div class="col-sm-4">
-            <img class="img-responsive" src="/img/001.jpg" style="width: 400px ; height: 450px"/>
+            <img class="img-responsive" th:src="${book.bookpic}" style="width: 400px ; height: 450px"/>
         </div>
         <!--简介区-->
         <div class="col-sm-5">
-            <label><h2>Java编程思想</h2></label>
+            <label><h2 th:text="${book.bookname}"></h2></label>
             <ul class="list-group" style="margin-top: 50px">
-                <li class="list-group-item">作者/译者：<label>Gasoline</label></li>
-                <li class="list-group-item">出版社：</li>
-                <li class="list-group-item">库存：</li>
-                <li class="list-group-item">成交量：</li>
-                <li class="list-group-item">浏览次数：</li>
-                <li class="list-group-item">售价：</li>
-                <li class="list-group-item">ISBN：</li>
+                <li class="list-group-item">作者/译者：<label th:text="${book.bookauthor}"></label></li>
+                <li class="list-group-item">出版社：<label th:text="${book.bookpress}"></label></li>
+                <li class="list-group-item">库存：<label th:text="${book.bookstoremount}"></label></li>
+                <li class="list-group-item">成交量：<label th:text="${book.bookdealmount}"></label></li>
+                <li class="list-group-item">浏览次数：<label th:text="${book.booklookmount}"></label></li>
+                <li class="list-group-item">售价：<label th:text="${book.bookprprice}"></label></li>
+                <li class="list-group-item">ISBN：<label th:text="${book.bookisbn}"></label></li>
             </ul>
             <div class="btn-group btn-group-lg">
 
