@@ -21,6 +21,7 @@ public class BookController {
     @Autowired
     private BookService bookService ;
 
+    //载入主页
     @RequestMapping(value="/index", method= RequestMethod.GET)
     public String index(Model model,HttpSession session) {
         model.addAttribute("book",new Book());
@@ -34,13 +35,14 @@ public class BookController {
         return "index" ;
     }
 
+
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String indexbook(Model model) {
         model.addAttribute("book",new Book());
         return "index" ;
     }
 
-    //按类型查找图书
+    //导航栏按类型查找图书
     @RequestMapping("findByType")
     public ModelAndView findByType(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String type = request.getParameter("type") ;
@@ -52,7 +54,7 @@ public class BookController {
         return modelAndView ;
     }
 
-    //按书名查找图书
+    //搜索框按书名查找图书
     @RequestMapping(value="findByName")
     public ModelAndView findByName(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String name = request.getParameter("name") ;

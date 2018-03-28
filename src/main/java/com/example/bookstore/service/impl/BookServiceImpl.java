@@ -1,6 +1,7 @@
 package com.example.bookstore.service.impl;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.entity.BookComment;
 import com.example.bookstore.mapper.BookMapper;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book selectBookById(int bookId) {
        return bookMapper.selectBookById(bookId);
+    }
+
+    @Override
+    public List<BookComment> selectCommentsBybookid(int bookid) {
+       return bookMapper.selectCommentsBybookid(bookid);
     }
 
 }

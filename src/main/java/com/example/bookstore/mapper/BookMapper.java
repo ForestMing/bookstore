@@ -1,6 +1,7 @@
 package com.example.bookstore.mapper;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.entity.BookComment;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface BookMapper {
     List<Book> selectPopularBooks();
 
     Book selectBookById(int bookId) ;
+
+    List<BookComment> selectCommentsBybookid (int bookid);
 }

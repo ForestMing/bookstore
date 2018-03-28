@@ -1,6 +1,7 @@
 package com.example.bookstore.service;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.entity.BookComment;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface BookService {
     List<Book> selectPopularBooks();
 
     Book selectBookById(int bookId);
+
+    List<BookComment> selectCommentsBybookid (int bookid);
 }

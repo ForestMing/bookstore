@@ -56,4 +56,7 @@
     from tb_bookinfo b
     where b.BookId = #{bookId} ;
   </select>
+
+
+
 </mapper>
