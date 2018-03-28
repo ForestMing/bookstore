@@ -17,8 +17,8 @@
         <div class="thumbnail">
             <img th:src="${book.bookpic}" alt="通用的占位符缩略图"
                  style="margin-top: 2px ; width: 200px">
+            <h6 style="height: 2px" th:text="${book.bookname}"></h6>
             <div class="caption">
-                <h5 th:text="${book.bookname}"></h5>
                 <p class="text-special-default" th:text="售价：+${book.bookprprice}+元"/>
                 <p>
                     <button class="btn btn-primary" role="button"
