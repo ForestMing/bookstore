@@ -26,9 +26,13 @@ public class BookController {
     public String index(Model model,HttpSession session) {
         model.addAttribute("book",new Book());
         //判断用户登陆状态
-        String name = (String) session.getAttribute("loginname");
-        System.out.println("inden收到login用户："+name);
-        model.addAttribute("username",name);
+        if(session.getAttribute("loginid")!= null) {
+            String name = (String) session.getAttribute("loginname");
+            int uid = (Integer) session.getAttribute("loginid");
+            System.out.println("index收到login用户：" + name);
+            System.out.println("index收到login用户id：" + uid);
+            model.addAttribute("username", name);
+        }
         //按浏览量自动推送
         List<Book> popbooks = bookService.selectPopularBooks();
         model.addAttribute("popbooks",popbooks);

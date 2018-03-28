@@ -25,4 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     public int checkCnameAndCpwd(Customer customer) {
         return customerMapper.checkCnameAndCpwd(customer);
     }
+
+    @Override
+    public int selectCusId(String cName) {
+        return customerMapper.selectCusId(cName);
+    }
 }

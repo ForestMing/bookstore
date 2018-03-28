@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.bookstore.mapper.BookMapper" >
+    <resultMap id="BookDetailsResultMap" type="com.example.bookstore.entity.BookDetails" >
+        <id column="BookId" property="bookid" jdbcType="INTEGER" />
+        <result column="details1" property="details1" jdbcType="VARCHAR" />
+        <result column="details2" property="details2" jdbcType="VARCHAR" />
+        <result column="details3" property="details3" jdbcType="VARCHAR" />
+        <result column="details4" property="details4" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="BookDetailsinfo_Column_List" >
+        BookId,details1,details2,details3,details4
+    </sql>
+
+    <select id="selectDetailsBybookid" parameterType="int" resultMap="BookDetailsResultMap">
+      SELECT *
+        from tb_bookinfodetails bdt
+        where bdt.BookId = #{bookid}
+    </select>
+
+</mapper>

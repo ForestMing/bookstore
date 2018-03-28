@@ -30,7 +30,10 @@ public class LoginController {
         Match = customerService.checkCnameAndCpwd(customer);
         System.out.println("匹配？0不匹配:" + Match);
         if (Match == 1) {
+            int id = customerService.selectCusId(customer.getCustomername());
+            System.out.println("--------------------"+id);
             session.setAttribute("loginname",customer.getCustomername());
+            session.setAttribute("loginid",id);
                 return "redirect:index";
         } else {
             String errorinfo = "用户名或密码错误";

@@ -1,7 +1,7 @@
-package com.example.bookstore.mapper;
+package com.example.bookstore.service;
 
 import com.example.bookstore.entity.ShopBook;
 
-public interface ShopBookMapper {
+public interface ShopBookService {
     int addToCart(ShopBook shopBook);
 }

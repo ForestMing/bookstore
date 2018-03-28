@@ -2,6 +2,7 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.BookComment;
+import com.example.bookstore.entity.BookDetails;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,22 +21,32 @@ public class DetailsController {
     private BookService bookService ;
 
     //点击书本条目，载入书本详情页面
-    @RequestMapping(value = "/details",method = RequestMethod.GET)
-    public String details(HttpServletRequest request ,HttpSession session,Model model) {
-       String string = request.getParameter("id");
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public String details(HttpServletRequest request, HttpSession session, Model model) {
+        String string = request.getParameter("id");
         int id = Integer.parseInt(string);
         //判断用户登陆状态
-        String name = (String) session.getAttribute("loginname");
-        System.out.println("inden收到login用户：" + name);
-        model.addAttribute("username", name);
+        if(session.getAttribute("loginid") != null ){
+            String name = (String) session.getAttribute("loginname");
+            int uid = (Integer) session.getAttribute("loginid");
+            System.out.println("Details收到login用户name：" + name);
+            System.out.println("Details收到login用户id：" + uid);
+            model.addAttribute("username", name);
+            model.addAttribute("uid",uid);
+        }
         //加载图书基本信息 bookinfo
-       Book book = bookService.selectBookById(id);
-       model.addAttribute("book",book);
-       List<BookComment> comments = bookService.selectCommentsBybookid(id);
+        Book book = bookService.selectBookById(id);
+        model.addAttribute("book", book);
+        //加载图书评论
+        List<BookComment> comments = bookService.selectCommentsBybookid(id);
         System.out.println(comments);
-        model.addAttribute("comments",comments);
+        model.addAttribute("comments", comments);
+        //加载图书详情信息
+        BookDetails bookDetails = bookService.selectDetailsBybookid(id);
+        System.out.println(bookDetails);
+        model.addAttribute("details",bookDetails);
 
-        return "details" ;
+        return "details";
     }
 
 

@@ -2,12 +2,35 @@ package com.example.bookstore.entity;
 
 import java.math.BigDecimal;
 
-public class ShopBook extends ShopBookKey {
+public class ShopBook{
+    public ShopBook(){
+    }
+
+    private Integer customerid ;
+
+    private Integer bookid ;
+
     private Integer ordermount;
 
     private BigDecimal price;
 
     private String ispaid;
+
+    public Integer getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(Integer customerid) {
+        this.customerid = customerid;
+    }
+
+    public Integer getBookid() {
+        return bookid;
+    }
+
+    public void setBookid(Integer bookid) {
+        this.bookid = bookid;
+    }
 
     public Integer getOrdermount() {
         return ordermount;

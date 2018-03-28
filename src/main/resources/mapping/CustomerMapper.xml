@@ -39,4 +39,11 @@
         where cus.CustomerName = #{customername} and cus.CustomerPwd=#{customerpwd}
   </select>
 
+  <select id="selectCusId" parameterType="String" resultType="int">
+    SELECT cus.CustomerId
+    from tb_customerinfo cus
+    where cus.CustomerName = #{cName}
+  </select>
+
+
 </mapper>

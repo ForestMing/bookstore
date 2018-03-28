@@ -6,4 +6,5 @@ public interface CustomerService {
     int isExistName(String cusname);
     int insertCus(Customer customer);
     int checkCnameAndCpwd(Customer customer);
+    int selectCusId(String cName);
 }
