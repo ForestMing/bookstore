@@ -5,7 +5,7 @@
     <result column="CustomerId" property="customerid" jdbcType="INTEGER" />
     <result column="BookId" property="bookid" jdbcType="INTEGER" />
     <result column="ordermount" property="ordermount" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="FLOAT" />
     <result column="ispaid" property="ispaid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="ShopBook_Column_List" >

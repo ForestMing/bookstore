@@ -14,6 +14,7 @@ public class LoginOutController {
     @RequestMapping(value = "/loginout", method = RequestMethod.GET)
     public String loginout(Model model, HttpSession session) {
         session.removeAttribute("loginname");
+        session.removeAttribute("loginid");
         return "redirect:index";
     }
 

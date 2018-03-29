@@ -6,13 +6,24 @@ public class ShopBook{
     public ShopBook(){
     }
 
+    @Override
+    public String toString() {
+        return "ShopBook{" +
+                "customerid=" + customerid +
+                ", bookid=" + bookid +
+                ", ordermount=" + ordermount +
+                ", price=" + price +
+                ", ispaid='" + ispaid + '\'' +
+                '}';
+    }
+
     private Integer customerid ;
 
     private Integer bookid ;
 
     private Integer ordermount;
 
-    private BigDecimal price;
+    private float price;
 
     private String ispaid;
 
@@ -40,11 +51,11 @@ public class ShopBook{
         this.ordermount = ordermount;
     }
 
-    public BigDecimal getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

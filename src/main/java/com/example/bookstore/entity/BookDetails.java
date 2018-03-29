@@ -4,6 +4,17 @@ public class BookDetails {
     public BookDetails(){
     }
 
+    @Override
+    public String toString() {
+        return "BookDetails{" +
+                "bookid=" + bookid +
+                ", details1='" + details1 + '\'' +
+                ", details2='" + details2 + '\'' +
+                ", details3='" + details3 + '\'' +
+                ", details4='" + details4 + '\'' +
+                '}';
+    }
+
     private int bookid ;
     private String details1 ;
     private String details2 ;
