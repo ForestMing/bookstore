@@ -16,4 +16,14 @@ public class ShopBookServiceImpl implements ShopBookService{
     public int addToCart(ShopBook shopBook) {
         return shopBookMapper.addToCart(shopBook);
     }
+
+    @Override
+    public int ifExistItem(ShopBook shopBook) {
+        return shopBookMapper.ifExistItem(shopBook);
+    }
+
+    @Override
+    public int updateMount(ShopBook shopBook) {
+        return shopBookMapper.updateMount(shopBook);
+    }
 }

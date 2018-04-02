@@ -17,4 +17,16 @@
     VALUES(#{bookid},#{customerid},#{ordermount},#{price},#{ispaid})
   </insert>
 
+  <select id="ifExistItem" parameterType="com.example.bookstore.entity.ShopBook" resultType="int">
+    SELECT count(*)
+        from tb_shopbook s
+          where s.BookId=#{bookid} and s.CustomerId=#{customerid}
+  </select>
+
+  <update id="updateMount" parameterType="com.example.bookstore.entity.ShopBook" >
+    UPDATE tb_shopbook s
+      SET s.ordermount = s.ordermount + #{ordermount}
+      WHERE s.CustomerId = #{customerid} and s.BookId = #{bookid}
+  </update>
+
 </mapper>

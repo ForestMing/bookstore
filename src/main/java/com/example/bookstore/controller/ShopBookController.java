@@ -27,14 +27,40 @@ public class ShopBookController {
         if (session.getAttribute("loginid") == null) {
             System.out.println("ShopBookController:loginid == null ");
             //response.sendRedirect("login");
-            return "555";
+            return "请注册/登陆！";
         }else {
             System.out.println("ShopBookController:loginid != null ");
             System.out.println(shopBook);
-            int flag = shopBookService.addToCart(shopBook); System.out.println("Flag:(1为成功)"+flag);
-            return Integer.toString(flag) ;
+            int isAdded = isExistItem(shopBook);
+            if(isAdded == 1 ){
+               int updatesinfo =  updatenum(shopBook) ;
+               return Integer.toString(updatesinfo)+"更新成功";
+            }else {
+                int flag = shopBookService.addToCart(shopBook);
+                System.out.println("Flag:(1为成功)" + flag);
+                return Integer.toString(flag) + "成功加入购物车！";
+            }
         }
     }
+
+    /**
+     * 检测是否已存在同一用户同一商品的购物车添加
+     * @param shopBook
+     * @return shopbook条目。存在则返回1 ， 不存在返回0
+     */
+    public int isExistItem(ShopBook shopBook){
+        return shopBookService.ifExistItem(shopBook);
+    }
+
+    /**
+     * 更新重复添加至购物车的商品 数量
+     * @param shopBook
+     * @return 成功返回1
+     */
+    public int  updatenum(ShopBook shopBook){
+        return shopBookService.updateMount(shopBook);
+    }
+
 
 }
 
