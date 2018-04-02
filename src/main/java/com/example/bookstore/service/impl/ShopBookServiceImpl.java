@@ -6,6 +6,8 @@ import com.example.bookstore.service.ShopBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("ShopBookService")
 public class ShopBookServiceImpl implements ShopBookService{
     @Autowired
@@ -26,4 +28,5 @@ public class ShopBookServiceImpl implements ShopBookService{
     public int updateMount(ShopBook shopBook) {
         return shopBookMapper.updateMount(shopBook);
     }
+
 }

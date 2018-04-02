@@ -2,6 +2,8 @@ package com.example.bookstore.service;
 
 import com.example.bookstore.entity.ShopBook;
 
+import java.util.List;
+
 public interface ShopBookService {
     int addToCart(ShopBook shopBook);
 

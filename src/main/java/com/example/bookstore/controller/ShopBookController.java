@@ -1,18 +1,13 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.entity.Person;
 import com.example.bookstore.entity.ShopBook;
-import com.example.bookstore.service.CustomerService;
 import com.example.bookstore.service.ShopBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 
 @Controller
 public class ShopBookController {
@@ -34,11 +29,11 @@ public class ShopBookController {
             int isAdded = isExistItem(shopBook);
             if(isAdded == 1 ){
                int updatesinfo =  updatenum(shopBook) ;
-               return Integer.toString(updatesinfo)+"更新成功";
+               return "修改购物车数目成功！";
             }else {
                 int flag = shopBookService.addToCart(shopBook);
                 System.out.println("Flag:(1为成功)" + flag);
-                return Integer.toString(flag) + "成功加入购物车！";
+                return "成功加入购物车！";
             }
         }
     }

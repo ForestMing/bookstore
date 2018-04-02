@@ -14,7 +14,7 @@
 
   <insert id="addToCart" parameterType="com.example.bookstore.entity.ShopBook" >
     INSERT INTO tb_shopbook
-    VALUES(#{bookid},#{customerid},#{ordermount},#{price},#{ispaid})
+    VALUES(#{customerid},#{bookid},#{ordermount},#{price},#{ispaid})
   </insert>
 
   <select id="ifExistItem" parameterType="com.example.bookstore.entity.ShopBook" resultType="int">
@@ -28,5 +28,25 @@
       SET s.ordermount = s.ordermount + #{ordermount}
       WHERE s.CustomerId = #{customerid} and s.BookId = #{bookid}
   </update>
+
+  <select id="selectShopBooksByCusid" parameterType="int" resultMap="ShopBookResultMap">
+    select *
+      from tb_shopbook s
+      where s.CustomerId = #{cusid} ;
+  </select>
+
+  <select id="selectBookNameById" parameterType="int" resultType="String">
+    SELECT b.BookName
+      from tb_bookinfo b
+        where b.BookId = #{bookid}
+  </select>
+
+  <select id="selectBookPicById" parameterType="int" resultType="String">
+    SELECT b.BookPic
+    from tb_bookinfo b
+    where b.BookId = #{bookid}
+  </select>
+
+
 
 </mapper>

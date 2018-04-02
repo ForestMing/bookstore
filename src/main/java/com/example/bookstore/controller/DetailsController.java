@@ -34,7 +34,8 @@ public class DetailsController {
             cus.setCustomerid(uid);
             cus.setCustomername(name);
             model.addAttribute("currentCus",cus);
-
+        }else {
+            System.out.println("当前未登录！！！！！！！！！！！！！！！！！");
         }
         //加载图书基本信息 bookinfo
         Book book = bookService.selectBookById(id);
