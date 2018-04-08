@@ -38,10 +38,10 @@ public class CartController {
             //获取用户购物车清单
             List<ShopBook> carts = cartService.selectShopBooksByCusid(uid);
             System.out.println(carts);
+            //封装到BookVO对象中用于前台展示
             List<BookVO> bookVOList = new ArrayList<BookVO>();
             BookVO bookVO = new BookVO();
             for( ShopBook s : carts ){
-                //封装到BookVO对象中用于前台展示
                 bookVO.setBookid(s.getBookid());
                 bookVO.setBookname(cartService.selectBookNameById(s.getBookid()));
                 bookVO.setBookpic(cartService.selectBookPicById(s.getBookid()));

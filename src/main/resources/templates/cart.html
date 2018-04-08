@@ -10,6 +10,8 @@
     <script src="/bootstrap-3.3.7-dist/js/test.js" type="text/javascript"></script>
     <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+
 </head>
 <body>
 <!--导航栏-->
@@ -96,13 +98,18 @@
     });
 
     $(function () {
-        $("#checkAll").click(function () {
-            if ($(this).attr("checked") == 'checked') {
-                $("[name = 'ck']:checkbox").attr("checked", true);
+        //实现全选反选
+        $("#checkAll").on('click', function() {
+            $("tbody input:checkbox").prop("checked", $(this).prop('checked'));
+        })
+        $("tbody input:checkbox").on('click', function() {
+            //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+            if($("tbody input:checkbox").length === $("tbody input:checked").length) {
+                $("#checkAll").prop("checked", true);
             } else {
-                $("[name = 'ck']:checkbox").attr("checked", false);
+                $("#checkAll").prop("checked", false);
             }
-        });
+        })
     });
 
 </script>
