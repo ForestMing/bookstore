@@ -14,7 +14,14 @@ public class ShopBookController {
     @Autowired
     private ShopBookService shopBookService ;
 
-
+    /**
+     * 添加商品至购物车
+     * @param shopBook
+     * @param session
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/addCart" ,method = RequestMethod.POST)
     public @ResponseBody String add(@RequestBody ShopBook shopBook, HttpSession session , HttpServletResponse response)
             throws Exception

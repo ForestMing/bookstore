@@ -9,9 +9,14 @@ import com.example.bookstore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +40,8 @@ public class CartController {
             cus.setCustomername(name);
             //封装到customer对象中用于前台展示
             model.addAttribute("currentCus",cus);
-            //获取用户购物车清单
-            List<ShopBook> carts = cartService.selectShopBooksByCusid(uid);
-            System.out.println(carts);
-            //封装到BookVO对象中用于前台展示
-            List<BookVO> bookVOList = new ArrayList<BookVO>();
-            BookVO bookVO = new BookVO();
-            for( ShopBook s : carts ){
-                bookVO.setBookid(s.getBookid());
-                bookVO.setBookname(cartService.selectBookNameById(s.getBookid()));
-                bookVO.setBookpic(cartService.selectBookPicById(s.getBookid()));
-                bookVO.setMount(s.getOrdermount());
-                bookVOList.add(bookVO);
-            }
+            //得到用户购物车信息
+            List bookVOList = getCart(uid);
             //model中添加VO
             System.out.println(bookVOList);
             model.addAttribute("lists",bookVOList);
@@ -58,4 +52,43 @@ public class CartController {
 
     }
 
+    @RequestMapping(value="deletecart",method = RequestMethod.POST)
+    public ModelAndView deletecart(HttpServletRequest request) throws Exception{
+        int customerid = Integer.parseInt(request.getParameter("cusid") );
+        int bookid = Integer.parseInt( request.getParameter("bookid") );
+        System.out.println("deleteCart"+customerid+","+bookid);
+        ShopBook shopBook = new ShopBook();
+        shopBook.setCustomerid(customerid);
+        shopBook.setBookid(bookid);
+        int flag = 0 ;
+        flag = cartService.deleteShopbook(shopBook);
+        System.out.println("CartController: 删除购物车记录 1 成功:"+flag);
+        ModelAndView modelAndView = new ModelAndView("flashCart");
+        List bookVOList = getCart(customerid);
+        modelAndView.addObject("lists",bookVOList);
+        return modelAndView;
+    }
+
+    /**
+     * 获取登陆用户的购物车清单
+     * @param uid
+     * @return
+     */
+    public List getCart(int uid){
+        //获取用户购物车清单
+        List<ShopBook> carts = cartService.selectShopBooksByCusid(uid);
+        System.out.println(carts);
+        //封装到BookVO对象中用于前台展示
+        List<BookVO> bookVOList = new ArrayList<BookVO>();
+        for( ShopBook s : carts ){
+            BookVO bookVO = new BookVO();
+            bookVO.setBookid(s.getBookid());
+            bookVO.setBookname(cartService.selectBookNameById(s.getBookid()));
+            bookVO.setBookpic(cartService.selectBookPicById(s.getBookid()));
+            bookVO.setMount(s.getOrdermount());
+            bookVO.setBookprprice(s.getPrice());
+            bookVOList.add(bookVO);
+        }
+        return bookVOList;
+    }
 }

@@ -28,4 +28,9 @@ public class CartServiceImpl implements CartService {
     public String selectBookPicById(int bookid) {
         return shopBookMapper.selectBookPicById(bookid);
     }
+
+    @Override
+    public int deleteShopbook(ShopBook shopBook) {
+        return shopBookMapper.deleteShopbook(shopBook);
+    }
 }

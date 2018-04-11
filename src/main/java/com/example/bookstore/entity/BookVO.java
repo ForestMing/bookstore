@@ -4,7 +4,16 @@ public class BookVO {
     private int bookid ;
     private String bookname ;
     private int mount ;
-    private String bookpic ;
+    private String bookpic;
+    private float bookprprice ;
+
+    public float getBookprprice() {
+        return bookprprice;
+    }
+
+    public void setBookprprice(float bookprprice) {
+        this.bookprprice = bookprprice;
+    }
 
     public int getBookid() {
         return bookid;
@@ -45,6 +54,7 @@ public class BookVO {
                 ", bookname='" + bookname + '\'' +
                 ", mount=" + mount +
                 ", bookpic='" + bookpic + '\'' +
-                '}';
+                ", bookprprice='" + bookprprice + '\'' +
+                '}'+"\n";
     }
 }

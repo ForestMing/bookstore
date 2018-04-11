@@ -47,6 +47,10 @@
     where b.BookId = #{bookid}
   </select>
 
+  <delete id="deleteShopbook" parameterType="com.example.bookstore.entity.ShopBook">
+    DELETE from tb_shopbook
+        where CustomerId = #{customerid} and BookId = #{bookid} ;
+  </delete>
 
 
 </mapper>

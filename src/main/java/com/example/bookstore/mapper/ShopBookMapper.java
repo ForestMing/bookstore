@@ -16,4 +16,6 @@ public interface ShopBookMapper {
     String selectBookNameById(int bookid);
 
     String selectBookPicById(int bookid);
+
+    int deleteShopbook(ShopBook shopBook);
 }

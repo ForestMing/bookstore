@@ -7,10 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/main.css"/>
-    <script src="/bootstrap-3.3.7-dist/js/test.js" type="text/javascript"></script>
     <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
-
 
 </head>
 <body>
@@ -34,10 +32,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" th:if="${currentCus!=null}">
             <li><a href="userCenter" th:text="${currentCus.customername}"></a></li>
-            <li><a href="loginout" >注销</a></li>
+            <li><a href="loginout">注销</a></li>
         </ul>
     </div>
 </div>
+
 
 <!--固定宽度，支持响应式布局的容器-->
 <div class="container">
@@ -47,7 +46,9 @@
             <table class="table table-striped">
                 <h3 th:text="${currentCus.customername}+的购物车"></h3>
 
-                <button class="btn btn-primary" style="margin-right: 10px">结算</button>
+                <button class="btn btn-primary" style="margin-right: 10px" id="payButton">结算</button>
+                <button class="btn btn-primary" style="margin-right: 10px" id="deleteSelct">删除选定项</button>
+                <button class="btn btn-primary" style="margin-right: 10px" id="savachng">保存修改</button>
 
                 <caption>条纹表格布局</caption>
                 <thead>
@@ -55,22 +56,25 @@
                     <th><input type="checkbox" id="checkAll"/>全选</th>
                     <th>图样</th>
                     <th>书名</th>
+                    <th>单价</th>
                     <th>数量</th>
                 </tr>
                 </thead>
                 <tbody>
-                <div th:each="bookvo:${lists}">
+
+                <div id="trDiv" th:each="bookvo:${lists}">
                     <tr>
-                        <td><input type="checkbox"/><input type="hidden" id="realid" value=""/></td>
+                        <td><input type="checkbox" name="test"/></td>
                         <td><img th:src="${bookvo.bookpic}"
-                        style="margin-top: 2px ; width: 100px"></td>
+                                 style="margin-top: 2px ; width: 100px"></td>
                         <td th:text="${bookvo.bookname}"></td>
+                        <td th:text="${bookvo.bookprprice}"></td>
                         <td><input class="min" name="" type="button" value="-"/>
-                            <input class="text_box" id="num" type="text" th:value="${bookvo.mount}" style="width:25px;"/>
-                            <input class="add" name="" type="button" value="+"/></td>
-                        <td>
-                            <button class="btn btn-primary">删除</button>
+                            <input class="text_box" id="num" type="text" th:value="${bookvo.mount}"
+                                   style="width:25px;"/>
+                            <input class="add" name="" type="button" value="+"/>
                         </td>
+
                     </tr>
                 </div>
 
@@ -79,38 +83,54 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
 
+
+
+<script th:inline="javascript">
+    //数量选择框事件
     $(function () {
 
         $(".add").click(function () {
             // $(this).prev() 就是当前元素的前一个元素，即 text_box
             $(this).prev().val(parseInt($(this).prev().val()) + 1);
-            setTotal();
+            setTotal($(this).prev().val());
         });
 
         $(".min").click(function () {
             // $(this).next() 就是当前元素的下一个元素，即 text_box
-            $(this).next().val(parseInt($(this).next().val()) - 1);
-            setTotal();
+            if($(this).next().val() == 0 ){
+                $(this).next().val(0);
+            }else{
+                $(this).next().val(parseInt($(this).next().val()) - 1);
+            }
+            setTotal($(this).next().val());
         });
 
     });
 
+    //全选反选按钮事件
     $(function () {
         //实现全选反选
-        $("#checkAll").on('click', function() {
+        $("#checkAll").on('click', function () {
             $("tbody input:checkbox").prop("checked", $(this).prop('checked'));
         })
-        $("tbody input:checkbox").on('click', function() {
+        $("tbody input:checkbox").on('click', function () {
             //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
-            if($("tbody input:checkbox").length === $("tbody input:checked").length) {
+            if ($("tbody input:checkbox").length === $("tbody input:checked").length) {
                 $("#checkAll").prop("checked", true);
             } else {
                 $("#checkAll").prop("checked", false);
             }
         })
     });
+
+    $(function(){
+       $("#deleteSelct").click(function () {
+           var v=$("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
+           alert(v)
+       }) ;
+    });
+    //---------------------------------------------------------------------------
 
 </script>
 
