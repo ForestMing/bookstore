@@ -64,6 +64,7 @@
 
                 <div id="trDiv" th:each="bookvo:${lists}">
                     <tr>
+                        <input type="hidden" th:value="${bookvo.bookid}"/>
                         <td><input type="checkbox" name="test"/></td>
                         <td><img th:src="${bookvo.bookpic}"
                                  style="margin-top: 2px ; width: 100px"></td>
@@ -126,8 +127,33 @@
 
     $(function(){
        $("#deleteSelct").click(function () {
-           var v=$("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
-           alert(v)
+           var userid = /*[[${currentCus.customerid}]]*/ 'null';
+           var v2 = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
+           console.log(typeof v2) ; // string
+           //   var v = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get();
+           //    console.log(typeof v ); // object
+        //   var v3 = "StandarkString";
+        //   console.log(typeof v3) ;
+         //  for(key in v ){
+        //       console.log(key+":"+v[key]);
+         //  }
+
+           var str = "";
+           str = JSON.stringify(v2);
+           console.log(str);
+
+           $.ajax({
+               url: "deletecart",
+               data: {"linked": str ,"cusid":userid},
+               type: "POST",
+               success: function (data) {
+                  //
+                   data;
+                   alert("reload");
+               },
+               error:function(error){alert(error);}
+           });
+
        }) ;
     });
     //---------------------------------------------------------------------------

@@ -1,22 +1,18 @@
 package com.example.bookstore.controller;
 
-
-import com.example.bookstore.entity.Book;
 import com.example.bookstore.entity.BookVO;
 import com.example.bookstore.entity.Customer;
 import com.example.bookstore.entity.ShopBook;
 import com.example.bookstore.service.CartService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,25 +48,35 @@ public class CartController {
 
     }
 
+    /**
+     * 删除用户购物车选定条目
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value="deletecart",method = RequestMethod.POST)
-    public ModelAndView deletecart(HttpServletRequest request) throws Exception{
-        int customerid = Integer.parseInt(request.getParameter("cusid") );
-        int bookid = Integer.parseInt( request.getParameter("bookid") );
-        System.out.println("deleteCart"+customerid+","+bookid);
-        ShopBook shopBook = new ShopBook();
-        shopBook.setCustomerid(customerid);
-        shopBook.setBookid(bookid);
-        int flag = 0 ;
-        flag = cartService.deleteShopbook(shopBook);
-        System.out.println("CartController: 删除购物车记录 1 成功:"+flag);
-        ModelAndView modelAndView = new ModelAndView("flashCart");
-        List bookVOList = getCart(customerid);
-        modelAndView.addObject("lists",bookVOList);
-        return modelAndView;
-    }
+    public @ResponseBody String deleteShopbook(HttpServletRequest request)  throws Exception{
+        System.out.println("deletecart Controller-------------------------------------------");
+        int customerid = Integer.parseInt( request.getParameter("cusid") );
+        String booknames = request.getParameter("linked");
+       // int bookid = Integer.parseInt( request.getParameter("bookid") );
+        System.out.println("deleteCart:"+customerid+","+booknames);
+       booknames = booknames.replace("\"", "");
+       String[] items = booknames.split(",");
+       for(String s : items ){
+           System.out.println(s);
+       }
+        //        ShopBook shopBook = new ShopBook();
+//        shopBook.setCustomerid(customerid);
+//        shopBook.setBookid(bookid);
+//        int flag = 0 ;
+//        flag = cartService.deleteShopbook(shopBook);
+//        System.out.println("CartController: 删除购物车记录 1 成功:"+flag);
+        return "window.location.reload()" ;
+        }
 
     /**
-     * 获取登陆用户的购物车清单
+     * 获取登陆用户的购物车清单3
      * @param uid
      * @return
      */
