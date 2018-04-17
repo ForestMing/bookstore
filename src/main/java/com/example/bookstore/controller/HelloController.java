@@ -42,6 +42,9 @@ public class HelloController {
         return "/rankingList";
     }
 
-
+    @RequestMapping("/conditional")
+    public String conditional(){
+        return "/conditional";
+    }
 
 }

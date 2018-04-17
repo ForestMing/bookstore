@@ -12,24 +12,30 @@
     -->
 </head>
 <body>
-<div th:each="book:${books}"> <!--书本表单-->
-    <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
-            <img th:src="${book.bookpic}" alt="通用的占位符缩略图"
-                 style="margin-top: 2px ; width: 200px">
-            <h6 style="height: 2px" th:text="${book.bookname}"></h6>
-            <div class="caption">
-                <p class="text-special-default" th:text="售价：+${book.bookprprice}+元"/>
-                <p>
-                    <button class="btn btn-primary" role="button"
-                            th:onclick="'javascript:ItemClick('+${book.bookid}+')'">
-                        详情
-                    </button>
-                </p>
+    <div th:each="book:${books}"> <!--书本表单-->
+            <div class="col-sm-6 col-md-3">
+
+                <div class="thumbnail">
+                    <img th:src="${book.bookpic}" alt="通用的占位符缩略图"
+                    style="margin-top: 2px ; width: 200px ; height: 252px"/>
+
+
+                    <h4 style="height: 2px" th:text="${book.bookname}" ></h4>
+                    <div class="caption" >
+                        <div class="btn-group">
+                            <h5 style="margin-top: 20px" class="text-special-default"
+                                th:text="售价：+${book.bookprprice}+元"/>
+                            <button type="button" class="btn btn-default"
+                                    th:onclick="'javascript:ItemClick1('+${book.bookid}+')'">
+                                详情
+                            </button>
+                            <button type="button" class="btn btn-primary">加入购物车</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
     </div>
-</div>
+
 
 <script th:inline="javascript">
     function ItemClick(bookid){

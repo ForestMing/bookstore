@@ -10,11 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 public class BookController {
@@ -43,6 +40,9 @@ public class BookController {
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String indexbook(Model model) {
         model.addAttribute("book",new Book());
+        //按浏览量自动推送
+        List<Book> popbooks = bookService.selectPopularBooks();
+        model.addAttribute("popbooks",popbooks);
         return "index" ;
     }
 
@@ -58,17 +58,7 @@ public class BookController {
         return modelAndView ;
     }
 
-    //搜索框按书名查找图书
-    @RequestMapping(value="findByName")
-    public ModelAndView findByName(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        String name = request.getParameter("name") ;
-        System.out.println("findByName"+name);
-        List<Book> books = bookService.selectBookByName(name);
-        System.out.println("查到book："+books);
-        ModelAndView modelAndView = new ModelAndView("result");
-        modelAndView.addObject("books",books);
-        return modelAndView ;
-    }
+
 
 
 
