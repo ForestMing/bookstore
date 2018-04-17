@@ -30,6 +30,9 @@ public class BookController {
             System.out.println("index收到login用户id：" + uid);
             model.addAttribute("username", name);
         }
+        //推送信息
+        String message = "新书上架";
+        model.addAttribute("message",message) ;
         //按浏览量自动推送
         List<Book> popbooks = bookService.selectPopularBooks();
         model.addAttribute("popbooks",popbooks);
@@ -40,6 +43,9 @@ public class BookController {
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String indexbook(Model model) {
         model.addAttribute("book",new Book());
+        //推送信息
+        String message = "新书上架";
+        model.addAttribute("message",message) ;
         //按浏览量自动推送
         List<Book> popbooks = bookService.selectPopularBooks();
         model.addAttribute("popbooks",popbooks);
@@ -50,11 +56,14 @@ public class BookController {
     @RequestMapping("findByType")
     public ModelAndView findByType(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String type = request.getParameter("type") ;
-        System.out.println("findByType"+type);
+        System.out.println("findByType:"+type);
         List<Book> books = bookService.selectBookByTypeName(type);
         System.out.println("查到book："+books);
         ModelAndView modelAndView = new ModelAndView("result");
         modelAndView.addObject("books",books);
+        //推送信息
+        String message = "查找到【"+type+"】"+"类图书";
+        modelAndView.addObject("message",message) ;
         return modelAndView ;
     }
 
