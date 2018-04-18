@@ -34,7 +34,7 @@ public class LoginController {
             System.out.println("--------------------"+id);
             session.setAttribute("loginname",customer.getCustomername());
             session.setAttribute("loginid",id);
-                return "redirect:index";
+                return "redirect:userCenter";
         } else {
             String errorinfo = "用户名或密码错误";
             model.addAttribute("errorInfo",errorinfo);
