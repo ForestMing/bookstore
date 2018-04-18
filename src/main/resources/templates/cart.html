@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>森林书城-购物车</title>
+    <title>拴拴网 - 购物车</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -62,17 +62,23 @@
 
 <!--固定宽度，支持响应式布局的容器-->
 <div class="container">
+    <!--标题-->
+    <div>
+        <h1><font color="#f5f5f5" th:text="${currentCus.customername}"></font>
+        <label>&NonBreakingSpace;</label>
+        <font color="#9acd32"><label>购物车</label></font>
+        </h1>
+    </div>
     <!--网格布局,12列分配-->
     <div class="row">
-        <div class="col-sm-12" style="background-color: whitesmoke">
-            <table class="table table-striped">
-                <h3 th:text="${currentCus.customername}+的购物车"></h3>
-
-                <button class="btn btn-primary" style="margin-right: 10px" id="payButton">结算</button>
-                <button class="btn btn-primary" style="margin-right: 10px" id="deleteSelct">删除选定项</button>
-                <button class="btn btn-primary" style="margin-right: 10px" id="savachng">保存修改</button>
-
-                <caption>条纹表格布局</caption>
+        <div class="col-sm-12" style="background-color: snow">
+            <table class="table table-striped" style="margin-top: 10px">
+                <div style="margin-top: 20px">
+                    <button class="btn btn-primary" id="payButton">结算</button>
+                    <button class="btn btn-primary" id="deleteSelct">删除选定项</button>
+                    <button class="btn btn-primary" id="savachng">保存修改</button>
+                </div>
+                <caption><font color="black" size="3">购物车中有以下商品</font></caption>
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="checkAll"/>全选</th>
@@ -82,6 +88,7 @@
                     <th>数量</th>
                 </tr>
                 </thead>
+
                 <tbody>
 
                 <div id="trDiv" th:each="bookvo:${lists}">
@@ -102,11 +109,18 @@
                 </div>
 
                 </tbody>
+
             </table>
         </div>
     </div>
 </div>
 
+
+<div class="footer">
+    <font color="#f5f5f5">
+        © 2018 拴拴网 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备
+    </font>
+</div>
 
 
 <script th:inline="javascript">

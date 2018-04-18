@@ -14,9 +14,9 @@ img {
 
 .navbar-brand {
     width: 60px;
-    background-image: url(../img/logo-sen.png);
+    background-image: url(../img/icon.jpg);
     background-repeat: no-repeat;
-    background-size: 250%;
+    background-size: 70%;
     background-position: center center;
 }
 
