@@ -22,4 +22,10 @@ public interface BookService {
     List<Book> selectNewBook();
 
     List<Book> selectBestSaleBook () ;
+
+    List<Book> selectPopularBooksPlus();
+
+    List<Book> selectNewBookPlus();
+
+    List<Book> selectBestSaleBookPlus();
 }

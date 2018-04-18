@@ -12,15 +12,21 @@ public interface BookMapper {
 
     List<Book> selectBookByName(String name ) ;
 
-    List<Book> selectPopularBooks();
-
     Book selectBookById(int bookId) ;
 
     List<BookComment> selectCommentsBybookid (int bookid);
 
     BookDetails selectDetailsBybookid(int bookid);
 
+    List<Book> selectPopularBooks();
+
     List<Book> selectNewBook();
 
     List<Book> selectBestSaleBook();
+
+    List<Book> selectPopularBooksPlus();
+
+    List<Book> selectNewBookPlus();
+
+    List<Book> selectBestSaleBookPlus();
 }
