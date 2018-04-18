@@ -18,4 +18,8 @@ public interface BookService {
     List<BookComment> selectCommentsBybookid (int bookid);
 
     BookDetails selectDetailsBybookid(int boodid) ;
+
+    List<Book> selectNewBook();
+
+    List<Book> selectBestSaleBook () ;
 }

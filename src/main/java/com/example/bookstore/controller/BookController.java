@@ -30,12 +30,29 @@ public class BookController {
             System.out.println("index收到login用户id：" + uid);
             model.addAttribute("username", name);
         }
-        //推送信息
-        String message = "新书上架";
-        model.addAttribute("message",message) ;
-        //按浏览量自动推送
+
+        model.addAttribute("book",new Book());
+        //推送信息-新书
+        String message1 = "新书上架";
+        model.addAttribute("message1",message1) ;
+        List<Book> newbooks = bookService.selectNewBook() ;
+        System.out.println("新----------------------------------:"+newbooks);
+        model.addAttribute("newbooks",newbooks);
+
+        //推送信息-浏览量高书
+        String message2 = "热门关注";
+        model.addAttribute("message2",message2) ;
         List<Book> popbooks = bookService.selectPopularBooks();
+        System.out.println("热-----------------------------        ："+popbooks);
         model.addAttribute("popbooks",popbooks);
+
+        //推送信息-销售量高书
+        String message3 = "畅销书籍";
+        model.addAttribute("message3",message3) ;
+        List<Book> salebooks = bookService.selectBestSaleBook();
+        System.out.println("销-------------------------------------：" +salebooks);
+        model.addAttribute("salebooks",salebooks);
+
         return "index" ;
     }
 
@@ -43,12 +60,27 @@ public class BookController {
     @RequestMapping(value="/", method= RequestMethod.GET)
     public String indexbook(Model model) {
         model.addAttribute("book",new Book());
-        //推送信息
-        String message = "新书上架";
-        model.addAttribute("message",message) ;
-        //按浏览量自动推送
+        //推送信息-新书
+        String message1 = "新书上架";
+        model.addAttribute("message1",message1) ;
+        List<Book> newbooks = bookService.selectNewBook() ;
+        System.out.println("新----------------------------------:"+newbooks);
+        model.addAttribute("newbooks",newbooks);
+
+        //推送信息-浏览量高书
+        String message2 = "热门关注";
+        model.addAttribute("message2",message2) ;
         List<Book> popbooks = bookService.selectPopularBooks();
+        System.out.println("热-----------------------------        ："+popbooks);
         model.addAttribute("popbooks",popbooks);
+
+        //推送信息-销售量高书
+        String message3 = "畅销书籍";
+        model.addAttribute("message3",message3) ;
+        List<Book> salebooks = bookService.selectBestSaleBook();
+        System.out.println("销-------------------------------------：" +salebooks);
+        model.addAttribute("salebooks",salebooks);
+
         return "index" ;
     }
 

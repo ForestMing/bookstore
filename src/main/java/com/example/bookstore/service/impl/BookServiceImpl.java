@@ -46,4 +46,14 @@ public class BookServiceImpl implements BookService {
         return bookMapper.selectDetailsBybookid(boodid);
     }
 
+    @Override
+    public List<Book> selectNewBook() {
+        return bookMapper.selectNewBook();
+    }
+
+    @Override
+    public List<Book> selectBestSaleBook() {
+        return bookMapper.selectBestSaleBook();
+    }
+
 }

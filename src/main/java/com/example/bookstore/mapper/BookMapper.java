@@ -19,4 +19,8 @@ public interface BookMapper {
     List<BookComment> selectCommentsBybookid (int bookid);
 
     BookDetails selectDetailsBybookid(int bookid);
+
+    List<Book> selectNewBook();
+
+    List<Book> selectBestSaleBook();
 }

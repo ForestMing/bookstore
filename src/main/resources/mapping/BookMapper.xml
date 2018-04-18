@@ -46,15 +46,30 @@
   </select>
 
   <select id="selectPopularBooks" resultMap="BookResultMap">
-      select *
+      SELECT *
       from tb_bookinfo b
-      where b.BookLookmount > 0 ;
+      ORDER BY b.BookLookmount DESC
+      LIMIT 6 ;
   </select>
 
   <select id="selectBookById" parameterType="int" resultMap="BookResultMap">
     SELECT *
     from tb_bookinfo b
     where b.BookId = #{bookId} ;
+  </select>
+
+  <select id="selectNewBook"  resultMap="BookResultMap">
+    SELECT *
+      from tb_bookinfo b
+      where b.BookPackstyle = 'new'
+      LIMIT 6 ;
+  </select>
+
+  <select id="selectBestSaleBook"  resultMap="BookResultMap">
+    SELECT *
+      from tb_bookinfo b
+      ORDER BY b.BookDealmount DESC
+      LIMIT 6 ;
   </select>
 
 
