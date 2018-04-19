@@ -12,6 +12,15 @@
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
     <script async type="text/javascript" src="/bootstrap-3.3.7-dist/js/background.js"></script>
 
+    <link href="/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <script src="/dist/js/bootstrap-select.min.js"></script>
+
+    <link href="/addressTool/css/city-picker.css" rel="stylesheet" type="text/css" />
+
+    <script src="/addressTool/js/city-picker.data.js"></script>
+    <script src="/addressTool/js/city-picker.js"></script>
+    <script src="/addressTool/js/main.js"></script>
+
     <style>
         body, html {
             position: absolute;
@@ -118,34 +127,103 @@
         <!--左导航-->
         <div class="col-xs-2" id="myScrollspy">
             <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
-                <li class="active"><a href="#section-1"><font color="yellow" size="4">书籍管理</font></a></li>
-                <li><a href="#section-2"><font color="#adff2f" size="4">用户管理</font></a></li>
-                <li><a href="#section-3"><font color="#9acd32" size="4">订单管理</font></a></li>
+                <li class="active"><a href="#section-1"><font color="yellow" size="4">个人信息</font></a></li>
+                <li><a href="#section-2"><font color="#adff2f" size="4">收货地址</font></a></li>
             </ul>
         </div>
         <!--右显示-->
         <div class="col-xs-10" style="background-color: snow">
             <div>
                 <h5 id="section-1" class="page-header"></h5>
-                <h2 >书籍管理</h2>
+                <hr>
+                <h2 >个人信息</h2>
+                <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal1">
+                    修改基本信息
+                </button>
+                <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal2">
+                    修改密保信息
+                </button>
+                <ul class="list-group" style="margin-top: 20px">
+                    <li class="list-group-item">姓名  ：
+                        <a th:if="${currentCus.customertruename} ne 0">
+                            <label th:text="${currentCus.customertruename}"></label>
+                        </a>
+                        <a th:if="${currentCus.customertruename} eq 0">
+                            <label>未填写</label>
+                        </a>
+                    </li>
+                    <li class="list-group-item">手机号：
+                        <a th:if="${currentCus.customertel} ne 0">
+                            <label th:text="${currentCus.customertel}"></label>
+                        </a>
+                        <a th:if="${currentCus.customertel} eq 0">
+                            <label>未填写</label>
+                        </a>
+                    </li>
+                    <li class="list-group-item">E-mail：
+                        <a th:if="${currentCus.customeremail} ne 0">
+                            <label th:text="${currentCus.customeremail}"></label>
+                        </a>
+                        <a th:if="${currentCus.customeremail} eq 0">
+                            <label>未填写</label>
+                        </a>
+                    </li>
+                    <li class="list-group-item">性别  ：
+                        <a th:if="${currentCus.customersex} ne 0">
+                            <label th:text="${currentCus.customersex}"></label>
+                        </a>
+                        <a th:if="${currentCus.customersex} eq 0">
+                            <label>未填写</label>
+                        </a>
+                    </li>
+                    <li class="list-group-item">所属地：
+                        <a th:if="${currentCus.customeraddr} ne 0">
+                            <label th:text="${currentCus.customeraddr}"></label>
+                        </a>
+                        <a th:if="${currentCus.customeraddr} eq 0">
+                            <label>未填写</label>
+                        </a>
+                    </li>
+                </ul>
+                <p>Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra libero egestas
+                    sit amet. Etiam porttitor dolor non eros pulvinar malesuada. Vestibulum sit amet est mollis nulla
+                    tempus aliquet. Praesent luctus hendrerit arcu non laoreet. Morbi consequat placerat magna, ac
+                    ornare odio sagittis sed. Donec vitae ullamcorper purus. Vivamus non metus ac justo porta
+                    volutpat.</p>
+                <p>Vivamus mattis accumsan erat, vel convallis risus pretium nec. Integer nunc nulla, viverra ut sem
+                    non, scelerisque vehicula arcu. Fusce bibendum convallis augue sit amet lobortis. Cras porta urna
+                    turpis, sodales lobortis purus adipiscing id. Maecenas ullamcorper, turpis suscipit pellentesque
+                    fringilla, massa lacus pulvinar mi, nec dignissim velit arcu eget purus. Nam at dapibus tellus, eget
+                    euismod nisl. Ut eget venenatis sapien. Vivamus vulputate varius mauris, vel varius nisl facilisis
+                    ac. Nulla aliquet justo a nibh ornare, eu congue neque rutrum.</p>
+                <p>Suspendisse a orci facilisis, dignissim tortor vitae, ultrices mi. Vestibulum a iaculis lacus.
+                    Phasellus vitae convallis ligula, nec volutpat tellus. Vivamus scelerisque mollis nisl, nec vehicula
+                    elit egestas a. Sed luctus metus id mi gravida, faucibus convallis neque pretium. Maecenas quis
+                    sapien ut leo fringilla tempor vitae sit amet leo. Donec imperdiet tempus placerat. Pellentesque
+                    pulvinar ultrices nunc sed ultrices. Morbi vel mi pretium, fermentum lacus et, viverra tellus.
+                    Phasellus sodales libero nec dui convallis, sit amet fermentum sapien auctor. Vestibulum ante ipsum
+                    primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu elementum nibh, quis varius
+                    libero.</p>
+            </div>
+
+            <div>
+                <h5 id="section-2" class="page-header"></h5>
+                <hr>
+                <h2>收货地址</h2>
                 <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal">
-                    添加书籍
+                    搜索用户
                 </button>
                 <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal">
-                    搜索书籍
+                    添加新用户
                 </button>
                 <table class="table">
                     <caption>表格</caption>
                     <thead>
                     <tr>
-                        <th>书名</th>
-                        <th>作者</th>
-                        <th>出版社</th>
-                        <th>版次</th>
-                        <th>售价</th>
-                        <th>入库时间</th>
-                        <th>库存</th>
-                        <th>ISBN</th>
+                        <th>用户名</th>
+                        <th>性别</th>
+                        <th>E-mail</th>
+                        <th>上次登陆时间</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -154,13 +232,9 @@
                         <td>Bangalore</td>
                         <td>Bangalore</td>
                         <td>Bangalore</td>
-                        <td>Bangalore</td>
-                        <td>Bangalore</td>
-                        <td>Bangalore</td>
-                        <td>Bangalore</td>
                         <td>
-                            <Button class="btn btn-primary">修改</Button>
-                            <Button class="btn btn-primary">删除</Button>
+                            <Button>修改</Button>
+                            <Button>删除</Button>
                         </td>
                     </tr>
                     </tbody>
@@ -184,84 +258,7 @@
                     Phasellus sodales libero nec dui convallis, sit amet fermentum sapien auctor. Vestibulum ante ipsum
                     primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu elementum nibh, quis varius
                     libero.</p>
-
             </div>
-            <hr>
-            <h5 id="section-2" class="page-header"></h5>
-            <h2 >用户管理</h2>
-            <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal">
-                搜索用户
-            </button>
-            <button class="btn btn-primary btn-sl" data-toggle="modal" data-target="#myModal">
-                添加新用户
-            </button>
-            <table class="table">
-                <caption>表格</caption>
-                <thead>
-                <tr>
-                    <th>用户名</th>
-                    <th>性别</th>
-                    <th>E-mail</th>
-                    <th>上次登陆时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Tanmay</td>
-                    <td>Bangalore</td>
-                    <td>Bangalore</td>
-                    <td>Bangalore</td>
-                    <td>
-                        <Button>修改</Button>
-                        <Button>删除</Button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <p>Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra libero egestas
-                sit amet. Etiam porttitor dolor non eros pulvinar malesuada. Vestibulum sit amet est mollis nulla
-                tempus aliquet. Praesent luctus hendrerit arcu non laoreet. Morbi consequat placerat magna, ac
-                ornare odio sagittis sed. Donec vitae ullamcorper purus. Vivamus non metus ac justo porta
-                volutpat.</p>
-            <p>Vivamus mattis accumsan erat, vel convallis risus pretium nec. Integer nunc nulla, viverra ut sem
-                non, scelerisque vehicula arcu. Fusce bibendum convallis augue sit amet lobortis. Cras porta urna
-                turpis, sodales lobortis purus adipiscing id. Maecenas ullamcorper, turpis suscipit pellentesque
-                fringilla, massa lacus pulvinar mi, nec dignissim velit arcu eget purus. Nam at dapibus tellus, eget
-                euismod nisl. Ut eget venenatis sapien. Vivamus vulputate varius mauris, vel varius nisl facilisis
-                ac. Nulla aliquet justo a nibh ornare, eu congue neque rutrum.</p>
-            <p>Suspendisse a orci facilisis, dignissim tortor vitae, ultrices mi. Vestibulum a iaculis lacus.
-                Phasellus vitae convallis ligula, nec volutpat tellus. Vivamus scelerisque mollis nisl, nec vehicula
-                elit egestas a. Sed luctus metus id mi gravida, faucibus convallis neque pretium. Maecenas quis
-                sapien ut leo fringilla tempor vitae sit amet leo. Donec imperdiet tempus placerat. Pellentesque
-                pulvinar ultrices nunc sed ultrices. Morbi vel mi pretium, fermentum lacus et, viverra tellus.
-                Phasellus sodales libero nec dui convallis, sit amet fermentum sapien auctor. Vestibulum ante ipsum
-                primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu elementum nibh, quis varius
-                libero.</p>
-
-            <hr>
-            <h5 id="section-3" class="page-header"></h5>
-            <h2 >订单管理</h2>
-            <p>Nam eget purus nec est consectetur vehicula. Nullam ultrices nisl risus, in viverra libero egestas
-                sit amet. Etiam porttitor dolor non eros pulvinar malesuada. Vestibulum sit amet est mollis nulla
-                tempus aliquet. Praesent luctus hendrerit arcu non laoreet. Morbi consequat placerat magna, ac
-                ornare odio sagittis sed. Donec vitae ullamcorper purus. Vivamus non metus ac justo porta
-                volutpat.</p>
-            <p>Vivamus mattis accumsan erat, vel convallis risus pretium nec. Integer nunc nulla, viverra ut sem
-                non, scelerisque vehicula arcu. Fusce bibendum convallis augue sit amet lobortis. Cras porta urna
-                turpis, sodales lobortis purus adipiscing id. Maecenas ullamcorper, turpis suscipit pellentesque
-                fringilla, massa lacus pulvinar mi, nec dignissim velit arcu eget purus. Nam at dapibus tellus, eget
-                euismod nisl. Ut eget venenatis sapien. Vivamus vulputate varius mauris, vel varius nisl facilisis
-                ac. Nulla aliquet justo a nibh ornare, eu congue neque rutrum.</p>
-            <p>Suspendisse a orci facilisis, dignissim tortor vitae, ultrices mi. Vestibulum a iaculis lacus.
-                Phasellus vitae convallis ligula, nec volutpat tellus. Vivamus scelerisque mollis nisl, nec vehicula
-                elit egestas a. Sed luctus metus id mi gravida, faucibus convallis neque pretium. Maecenas quis
-                sapien ut leo fringilla tempor vitae sit amet leo. Donec imperdiet tempus placerat. Pellentesque
-                pulvinar ultrices nunc sed ultrices. Morbi vel mi pretium, fermentum lacus et, viverra tellus.
-                Phasellus sodales libero nec dui convallis, sit amet fermentum sapien auctor. Vestibulum ante ipsum
-                primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu elementum nibh, quis varius
-                libero.</p>
-            <hr>
-
         </div>
     </div>
 </div>
@@ -272,8 +269,8 @@
     </font>
 </div>
 
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 模态框（Modal）1 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -281,27 +278,30 @@
                     &times;
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
-                    完善您的个人信息
+                    基本个人信息
                 </h4>
             </div>
             <div class="modal-body">
-                <form role="form" class="form-horizontal">
+                <form id="basicForm" th:action="@{/updateBasicInfo}" role="form" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control">
+                            <input type="text" th:value="${currentCus.customertruename}"
+                                   class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control">
+                            <input type="text" th:value="${currentCus.customertel}"
+                                   class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" >
+                            <input type="text" th:value="${currentCus.customeremail}"
+                                   class="form-control" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -318,12 +318,42 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">性别</label>
                         <div class="col-sm-10">
-                            <select id="sex" class="selectpicker">
-                                <option value="1">男</option>
-                                <option value="2">女</option>
-                            </select>
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadiosinline" id="optionsRadiosMan" value="option1" checked> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadiosinline" id="optionsRadiosFemale"  value="option2"> 女
+                            </label>
                         </div>
                     </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal）2 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    密保信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密保问题</label>
                         <div class="col-sm-10">
@@ -348,7 +378,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
                 <button type="button" class="btn btn-primary">
-                    注册
+                    确认
                 </button>
             </div>
         </div><!-- /.modal-content -->

@@ -30,4 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
     public int selectCusId(String cName) {
         return customerMapper.selectCusId(cName);
     }
+
+    @Override
+    public Customer getCusInfoById(int cid) {
+        return customerMapper.getCusInfoById(cid);
+    }
 }

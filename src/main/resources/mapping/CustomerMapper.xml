@@ -45,5 +45,11 @@
     where cus.CustomerName = #{cName}
   </select>
 
+  <select id="getCusInfoById" parameterType="int" resultMap="CustomerResultMap">
+    SELECT *
+    from tb_customerinfo c
+    where c.CustomerId = #{cid} ;
+  </select>
+
 
 </mapper>

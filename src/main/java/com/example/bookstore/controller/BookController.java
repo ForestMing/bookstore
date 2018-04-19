@@ -1,6 +1,7 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.entity.Book;
+import com.example.bookstore.entity.Customer;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,12 @@ public class BookController {
             int uid = (Integer) session.getAttribute("loginid");
             System.out.println("index收到login用户：" + name);
             System.out.println("index收到login用户id：" + uid);
-            model.addAttribute("username", name);
+            //封装到cus对象
+            Customer cus = new Customer();
+            cus.setCustomerid(uid);
+            cus.setCustomername(name);
+            //封装到customer对象中用于前台展示
+            model.addAttribute("currentCus",cus);
         }
 
         model.addAttribute("book",new Book());

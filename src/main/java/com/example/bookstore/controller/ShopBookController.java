@@ -26,6 +26,7 @@ public class ShopBookController {
     public @ResponseBody String add(@RequestBody ShopBook shopBook, HttpSession session , HttpServletResponse response)
             throws Exception
     {
+        System.out.println("addCart Controller --------------------------------------------------");
         if (session.getAttribute("loginid") == null) {
             System.out.println("ShopBookController:loginid == null ");
             //response.sendRedirect("login");

@@ -7,4 +7,5 @@ public interface CustomerService {
     int insertCus(Customer customer);
     int checkCnameAndCpwd(Customer customer);
     int selectCusId(String cName);
+    Customer getCusInfoById(int cid);
 }

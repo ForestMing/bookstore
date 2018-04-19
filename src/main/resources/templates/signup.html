@@ -115,8 +115,9 @@
         </h1>
 
         <form id="signupform" th:action="@{/addCus}" th:object="${customer}" method="post">
+
             <div class="form-group">
-                <label><font color="#f5f5f5">手机号</font></label>
+                <label><font color="#f5f5f5">账号</font></label>
                 <label>&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;&NonBreakingSpace;
                 </label>
                 <label th:text="${errorInfo}" style="color: red"></label>
@@ -135,14 +136,14 @@
                 <label><font color="#f5f5f5">密码</font></label>
                 <input type="password" class="form-control" th:field="*{customerpwd}"/>
             </div>
+
+
             <p><font color="#00bfff">注册即代表您同意</font><a href="#"><font color="#7fff00">森林书城服务条款</font></a></p>
         <!--   <div class="btn-group">  -->
             <div class="form-group">
-                <button id="signupbtn" class="btn btn-primary btn-block">直接注册</button>
+                <button id="signupbtn" class="btn btn-primary btn-block">注册</button>
             </div>
         </form>
-        <button id="fillbtn" class="btn btn-default btn-block"
-                data-toggle="modal" >完善个人资料</button>
 
     </div>
 </div>
@@ -166,7 +167,7 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form role="form" class="form-horizontal">
+                <form id="modalDetailForm"  role="form" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">姓名</label>
                         <div class="col-sm-10">
@@ -208,12 +209,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密保问题</label>
                         <div class="col-sm-10">
-                            <select id="question" class="selectpicker">
-                                <option value="1">问题1</option>
-                                <option value="2">问题2</option>
-                                <option value="3">问题3</option>
-                                <option value="4">问题4</option>
-                            </select>
+                            <input type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -229,7 +225,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
                 <button type="button" class="btn btn-primary">
-                    注册
+                    保存
                 </button>
             </div>
         </div><!-- /.modal-content -->

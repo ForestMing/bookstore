@@ -39,12 +39,16 @@ public class ConditionalController {
         System.out.println("conditional:" + condition);
         List<Book> books = bookService.selectBookByName(condition);
         System.out.println("byCondi查到book：" + books);
+
+        if(condition.equals("")){
+            condition = condition + "全部" ;
+        }
+        //添加查询结果数量
+        model.addAttribute("count",books.size());
         //添加书本信息
         model.addAttribute("books", books);
         //添加查询关键字
         model.addAttribute("keyword",condition);
-        //添加查询结果数量
-        model.addAttribute("count",books.size());
         //判断用户登陆状态
         if(session.getAttribute("loginid") != null ){
             int uid = (Integer) session.getAttribute("loginid");
