@@ -64,6 +64,10 @@ public class CartController {
         System.out.println("deleteCart(用户id，选中书name)):"+customerid+","+booknames);
         //字符串处理
        booknames = booknames.replace("\"", "");
+       //判断选择是否为空
+        if(booknames.equals("")){
+            return "noSelect" ;
+        }
        String[] items = booknames.split(",");
        //Integer类型集合存储书本id
         List<Integer> intItems = new ArrayList<>();
