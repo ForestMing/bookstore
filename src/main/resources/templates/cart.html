@@ -164,8 +164,8 @@
     $(function(){
        $("#deleteSelct").click(function () {
            var userid = /*[[${currentCus.customerid}]]*/ 'null';
-         //  var v2 = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
-           var v2 = $("input[type='checkbox'][name='test']:checked").closest('tr').find('input:eq(0)').val() ;
+           var v2 = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
+        //   var v2 = $("input[type='checkbox'][name='test']:checked").closest('tr').find('input:eq(0)').val() ;
            console.log(typeof v2) ; // string
            //   var v = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get();
            //    console.log(typeof v ); // object
@@ -184,9 +184,9 @@
                data: {"linked": str ,"cusid":userid},
                type: "POST",
                success: function (data) {
-                  //
-                   data;
-                   alert("reload");
+                  if(data == "ok"){
+                      location.reload();
+                  }
                },
                error:function(error){alert(error);}
            });

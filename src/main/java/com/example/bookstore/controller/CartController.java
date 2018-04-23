@@ -57,22 +57,37 @@ public class CartController {
     @RequestMapping(value="deletecart",method = RequestMethod.POST)
     public @ResponseBody String deleteShopbook(HttpServletRequest request)  throws Exception{
         System.out.println("deletecart Controller-------------------------------------------");
+        //获取json报文中的用户id和被选中的书本id集合
         int customerid = Integer.parseInt( request.getParameter("cusid") );
         String booknames = request.getParameter("linked");
-       // int bookid = Integer.parseInt( request.getParameter("bookid") );
-        System.out.println("deleteCart:"+customerid+","+booknames);
+        //打印显示
+        System.out.println("deleteCart(用户id，选中书name)):"+customerid+","+booknames);
+        //字符串处理
        booknames = booknames.replace("\"", "");
        String[] items = booknames.split(",");
+       //Integer类型集合存储书本id
+        List<Integer> intItems = new ArrayList<>();
        for(String s : items ){
            System.out.println(s);
+           intItems.add(cartService.selectBookidByName(s));
        }
-        //        ShopBook shopBook = new ShopBook();
-//        shopBook.setCustomerid(customerid);
-//        shopBook.setBookid(bookid);
-//        int flag = 0 ;
-//        flag = cartService.deleteShopbook(shopBook);
-//        System.out.println("CartController: 删除购物车记录 1 成功:"+flag);
-        return "window.location.reload()" ;
+       //打印书本id集合
+        System.out.println(intItems);
+       //删除信息封装到shopbook对象中
+        ShopBook shopBook = new ShopBook();
+        shopBook.setCustomerid(customerid);
+        //循环set/删除
+        for (int i : intItems) {
+            shopBook.setBookid(i);
+            int flag = 0;
+            flag = cartService.deleteShopbook(shopBook);
+            if(flag == 0 ){
+                System.out.println("CartController: 删除购物车记录"+customerid+","+i);
+                continue;
+            }
+        }
+        //返回标志字段
+        return "ok";
         }
 
     /**

@@ -12,4 +12,6 @@ public interface CartService {
     String selectBookPicById(int bookid);
 
     int deleteShopbook(ShopBook shopBook);
+
+    int selectBookidByName(String name);
 }

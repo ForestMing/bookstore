@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/bootstrap-3.3.7-dist/main.css"/>
     <script src="/bootstrap-3.3.7-dist/js/test.js" type="text/javascript"></script>
     <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
     <script async type="text/javascript" src="/bootstrap-3.3.7-dist/js/background.js"></script>
 
     <style>
@@ -30,6 +32,7 @@
     </style>
 
 </head>
+
 <body>
 
 <canvas id="background"></canvas>
@@ -65,95 +68,16 @@
     <div class="row" style="margin-top: 30px">
         <!--12列书本展示区-->
         <div class="col-sm-12" style="background-color: ghostwhite"  >
+
             <!--分类导航菜单-->
-            <div class="navbar-collapse">
-                <!--分类导航菜单选项-->
-                <ul class="nav navbar-nav" style="font-size: medium ;">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black" >教育</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="typeItem">教材</a></li>
-                            <li><a href="#" class="typeItem">外语</a></li>
-                            <li><a href="#" class="typeItem">教辅</a></li>
-                            <li><a href="#" class="typeItem">工具书</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black">文学</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="typeItem">文学</a></li>
-                            <li><a href="#" class="typeItem">传记</a></li>
-                            <li><a href="#" class="typeItem">艺术</a></li>
-                            <li><a href="#" class="typeItem">摄影</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black">管理</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="typeItem">经济</a></li>
-                            <li><a href="#" class="typeItem">管理</a></li>
-                            <li><a href="#" class="typeItem">投资理财</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black">休闲</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="typeItem">休闲</a></li>
-                            <li><a href="#" class="typeItem">时尚</a></li>
-                            <li><a href="#" class="typeItem">旅游</a></li>
-                            <li><a href="#" class="typeItem">家居</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black">专业</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="typeItem">科普读物</a></li>
-                            <li><a href="#" class="typeItem">建筑</a></li>
-                            <li><a href="#" class="typeItem">医学</a></li>
-                            <li><a href="#" class="typeItem">计算机/网络</a></li>
-                            <li><a href="#" class="typeItem">农业/林业</a></li>
-                            <li><a href="#" class="typeItem">工业</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <font color="black">小说</font>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" class="typeItem">世界名著</a></li>
-                            <li><a href="#" class="typeItem">当代小说</a></li>
-                            <li><a href="#" class="typeItem">言情小说</a></li>
-                            <!--  <li class="divider"></li>
-                               <li><a href="#">分离的链接</a></li>
-                               -->
-                        </ul>
-                    </li>
-                </ul>
+            <div style="margin-top: 20px" >
+
+                <!--发帖按钮-->
+                <form class="navbar-form navbar-left" method="post">
+                    <div class="form-group">
+                        <input id="fButton" type="button" class="btn btn-primary" value="发帖"/>
+                    </div>
+                </form>
                 <!--条件搜索区-->
                 <form class="navbar-form navbar-right" id="searchForm" th:action="@{/byCondi}" method="post">
                     <div class="form-group">
@@ -162,48 +86,45 @@
                         <input type="reset" class="btn btn-default" value="重置"/>
                     </div>
                 </form>
+
             </div>
 
+            <!--内容展示区-->
             <div id="showBooks" class="post-list" style="margin-top: 25px"> <!--书本展示DIV-->
-                <!--文字区-->
-                <div class="form-container">
-                    <div class="form-group">
-                        <h3 class="text-center">
-                            <font color="black">
-                                <label th:text="找到【+${keyword}+】相关"></label>
-                            </font>
-                            <label>&NonBreakingSpace;</label>
-                            <font color="black"><label th:text="共+${count}+条"></label></font>
-                        </h3>
 
-                    </div>
-                </div>
-                <div th:each="book:${books}"> <!--书本表单-->
-                    <div class="col-sm-6 col-md-3" >
+                <!--自适应
+                <div class="table-responsive">-->
 
-                        <div class="thumbnail">
-                            <img th:src="${book.bookpic}" alt="通用的占位符缩略图"
-                                 style="margin-top: 2px ; width: 200px ; height: 252px"/>
+                    <table class="table">
+                        <caption></caption>
+                        <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>发起人</th>
+                            <th>发布时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><a href="#">可带劲啦</a></td>
+                            <td>Bangalore</td>
+                            <td>2018-4-23</td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">真正的烤面筋</a></td>
+                            <td>Mumbai</td>
+                            <td>2018-4-23</td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+             <!--   </div>-->
 
-                            <h4 style="height: 2px" th:text="${book.bookname}" ></h4>
-                            <div class="caption" >
-                                <div class="btn-group">
-                                    <h5 style="margin-top: 20px" class="text-special-default"
-                                        th:text="售价：+${book.bookprprice}+元"/>
-                                    <button type="button" class="btn btn-default"
-                                            th:onclick="'javascript:ItemClick1('+${book.bookid}+')'">
-                                        详情
-                                    </button>
-                                    <button type="button" class="btn btn-primary">加入购物车</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+
         </div>
     </div>
+
 </div>
 
 <div class="footer">

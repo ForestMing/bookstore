@@ -33,4 +33,9 @@ public class CartServiceImpl implements CartService {
     public int deleteShopbook(ShopBook shopBook) {
         return shopBookMapper.deleteShopbook(shopBook);
     }
+
+    @Override
+    public int selectBookidByName(String name) {
+        return shopBookMapper.selectBookidByName(name);
+    }
 }

@@ -47,6 +47,12 @@
     where b.BookId = #{bookid}
   </select>
 
+  <select id="selectBookidByName" parameterType="String" resultType="int">
+    select b.BookId
+      from tb_bookinfo b
+      where b.BookName = #{name}
+  </select>
+
   <delete id="deleteShopbook" parameterType="com.example.bookstore.entity.ShopBook">
     DELETE from tb_shopbook
         where CustomerId = #{customerid} and BookId = #{bookid} ;
