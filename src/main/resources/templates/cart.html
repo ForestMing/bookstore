@@ -134,11 +134,46 @@
     //修改图书购物车数量
     $(function() {
        $(".btn-default").click(function () {
+           var userid = /*[[${currentCus.customerid}]]*/ 'null';
+           var bookid = $(this).parent().parent().find('input:eq(0)').val();
+           var price = $(this).parent().parent().find('td:eq(3)').text();
+           var ispaid = 'no' ;
+           //暴力获取更改数量
            var tr = $(this).parent().parent();
            var td = tr.find('td:eq(5)');
            var div = td.find('div:eq(0)');
+           //获取数量框修改后数量
            var n = div.find('input:eq(1)').val();
-           console.log(n) ;
+
+           var json = {
+               'customerid':userid,
+               'bookid':bookid,
+               'ordermount':n,
+               'price':price,
+               'ispaid':ispaid
+           };
+
+           console.log(json) ;
+
+           //封装成json对象
+           var postdata = JSON.stringify(json);
+           console.log(postdata);
+
+           $.ajax({
+               url: "chngNum",
+               data: postdata,
+               type: "POST",
+               contentType: "application/json;charset=utf-8",
+               success: function (data) {
+                   if(data == "changeSuccess"){
+                       location.reload();
+                   }
+                   if(data == "changeFail"){
+                       alert("操作错误");
+                   }
+               },
+               error:function(error){alert(error);}
+           });
 
        }) ;
     });

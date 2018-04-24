@@ -20,4 +20,6 @@ public interface ShopBookMapper {
     int selectBookidByName(String name );
 
     int deleteShopbook(ShopBook shopBook);
+
+    int updateCartMount(ShopBook shopBook);
 }

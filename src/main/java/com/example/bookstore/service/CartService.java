@@ -14,4 +14,6 @@ public interface CartService {
     int deleteShopbook(ShopBook shopBook);
 
     int selectBookidByName(String name);
+
+    int updateCartMount(ShopBook shopBook);
 }

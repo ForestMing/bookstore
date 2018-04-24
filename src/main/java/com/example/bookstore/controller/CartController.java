@@ -8,6 +8,7 @@ import com.example.bookstore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,6 +48,8 @@ public class CartController {
         }
 
     }
+
+
 
     /**
      * 删除用户购物车选定条目
@@ -93,6 +96,28 @@ public class CartController {
         //返回标志字段
         return "ok";
         }
+
+
+
+    /**
+     * 修改购物车单条商品的添加量
+     */
+    @RequestMapping(value="/chngNum",method = RequestMethod.POST)
+    public @ResponseBody String changeCount(@RequestBody ShopBook shopBook)  throws Exception
+    {
+        System.out.println("``````````chngNum Controller :修改数量后的shopbook"+shopBook);
+        int flag = 0 ;
+        flag = cartService.updateCartMount(shopBook);
+        System.out.println("----------chngNum flag (1) 为成功 :" + flag);
+        if(flag == 1 ) {
+            return "changeSuccess";
+        }else{
+            return "changeFail";
+        }
+
+    }
+
+
 
     /**
      * 获取登陆用户的购物车清单3

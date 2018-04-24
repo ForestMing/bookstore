@@ -58,5 +58,11 @@
         where CustomerId = #{customerid} and BookId = #{bookid} ;
   </delete>
 
+  <update id="updateCartMount" parameterType="com.example.bookstore.entity.ShopBook">
+     update tb_shopbook s
+      SET s.ordermount = #{ordermount}
+      WHERE s.BookId = #{bookid} AND s.CustomerId = #{customerid} ;
+  </update>
+
 
 </mapper>
