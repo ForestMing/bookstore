@@ -209,8 +209,8 @@
 
         $(".min").click(function() {
             // $(this).next() 就是当前元素的下一个元素，即 text_box
-            if($(this).next().val() <= 0){
-                $(this).next().val(0);
+            if($(this).next().val() <= 1){
+                $(this).next().val(1);
             }else{
                 $(this).next().val(parseInt($(this).next().val()) - 1);
             }
