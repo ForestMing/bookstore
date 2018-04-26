@@ -122,6 +122,64 @@
     </div>
 </div>
 
+<!-- 完善订单信息模态框（Modal）1 -->
+<div class="modal fade" id="orderInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    请认真填写您的收货信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" >收货人:</label>
+                        <div class="col-sm-10">
+                            <input id="recevername" type="text" class="form-control" placeholder="王尼玛">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">联系方式:</label>
+                        <div class="col-sm-10">
+                            <input id="recevertel" type="text" class="form-control"  placeholder="xxx-xxxx-xxxx或其他可拨通号码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收货地址:</label>
+                        <div class="col-sm-10">
+                            <textarea id="receveraddr" class="form-control" placeholder="xxx省/xxx市/xxx县/xxx区/xxx街道门牌号">
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">留言:</label>
+                        <div class="col-sm-10">
+                            <textarea id=message class="form-control" placeholder="写下您对这单的要求"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">支付方式:</label>
+                        <div class="col-sm-10">
+                            <textarea id="paymethod" class="form-control" placeholder=""></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="makeOrderModal" type="button" class="btn btn-primary">
+                    确认
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 
 <div class="footer">
     <font color="#f5f5f5">
@@ -137,25 +195,50 @@
             //当前用户id
             var userid = /*[[${currentCus.customerid}]]*/ 'null';
             //选定的商品Map
-            var nameMap = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
-            console.log(nameMap);
+            var nameMap = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function () {
+                return this.innerHTML
+            }).get().join();
+
+            if (nameMap == "") {
+                alert("未勾选操作项");
+            } else {
+                //打开 订单信息 模态框，
+                $("#orderInfo").modal('show');
+
+                //提交订单事件
+                $("#makeOrderModal").click(function () {
+                    //获取模态框的order信息
+                    var recevername = $("#recevername").val();
+                    var recevertel = $("#recevertel").val();
+                    var receveraddr = $("#receveraddr").val();
+                    var message = $("#message").val();
+                    var paymethod = $("#paymethod").val();
+
+                    var od = recevername+","+recevertel+","+receveraddr+","+message+","+paymethod ;
+
+                    var odjson = JSON.stringify(od);
+                    console.log("收货信息："+odjson);
 
 
-            var json = JSON.stringify(nameMap);
-            console.log(json);
+                    var json = JSON.stringify(nameMap);
+                    console.log("订单商品名列表："+json);
+                    $.ajax({
+                        url: "createOrder",
+                        data: {"linked": json, "cusid": userid, "orderRecive": odjson},
+                        type: "POST",
+                        success: function (data) {
+                            // if(data == "makeSuccess"){
+                            //     location.href = "orders" ;
+                            // }
+                        },
+                        error: function (error) {
+                            alert("错误！");
+                        }
+                    });
 
-            $.ajax({
-                url: "createOrder",
-                data: {"linked": json ,"cusid":userid},
-                type: "POST",
-                success: function (data) {
-                    if(data == "makeSuccesss"){
-                        location.href = "orders" ;
-                    }
+                });
 
-                },
-                error:function(error){alert(error);}
-            });
+            }
 
         });
     });

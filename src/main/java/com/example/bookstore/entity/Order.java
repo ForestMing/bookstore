@@ -5,30 +5,37 @@ import java.util.Date;
 
 public class Order {
     private String orderid;
-
     private Integer id;
-
-    private Customer customer;
-
+    private int customerid ;
     private Date orderdate;
-
     private Integer ordermount;
-
     private String message;
-
     private String postmethod;
-
     private String paymethod;
-
     private String recevername;
-
     private String receveraddr;
-
     private String recevertel;
-
     private String memo;
+    private float totalprice;
 
-    private BigDecimal totalprice;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderid='" + orderid + '\'' +
+                ", id=" + id +
+                ", customerid=" + customerid +
+                ", orderdate=" + orderdate +
+                ", ordermount=" + ordermount +
+                ", message='" + message + '\'' +
+                ", postmethod='" + postmethod + '\'' +
+                ", paymethod='" + paymethod + '\'' +
+                ", recevername='" + recevername + '\'' +
+                ", receveraddr='" + receveraddr + '\'' +
+                ", recevertel='" + recevertel + '\'' +
+                ", memo='" + memo + '\'' +
+                ", totalprice=" + totalprice +
+                '}';
+    }
 
     public String getOrderid() {
         return orderid;
@@ -46,12 +53,12 @@ public class Order {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getCustomerid() {
+        return customerid;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerid(int customerid) {
+        this.customerid = customerid;
     }
 
     public Date getOrderdate() {
@@ -126,11 +133,11 @@ public class Order {
         this.memo = memo == null ? null : memo.trim();
     }
 
-    public BigDecimal getTotalprice() {
+    public float getTotalprice() {
         return totalprice;
     }
 
-    public void setTotalprice(BigDecimal totalprice) {
+    public void setTotalprice(float totalprice) {
         this.totalprice = totalprice;
     }
 }

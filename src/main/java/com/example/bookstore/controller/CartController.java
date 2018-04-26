@@ -2,6 +2,7 @@ package com.example.bookstore.controller;
 
 import com.example.bookstore.entity.BookVO;
 import com.example.bookstore.entity.Customer;
+import com.example.bookstore.entity.Order;
 import com.example.bookstore.entity.ShopBook;
 import com.example.bookstore.service.CartService;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -118,32 +121,38 @@ public class CartController {
     }
 
     /**
-     * 购物车选定商品结算
+     * 购物车选定商品结算，生成订单
      */
     @RequestMapping(value="createOrder",method = RequestMethod.POST)
-    public @ResponseBody String makeOrder(HttpServletRequest request,Model model )  throws Exception{
+    public @ResponseBody  String makeOrder(HttpServletRequest request,Model model )  throws Exception{
         System.out.println("createOrder Controller-------------------------------------------");
         //获取json报文中的用户id和被选中的书本id集合
         int customerid = Integer.parseInt( request.getParameter("cusid") );
         String booknames = request.getParameter("linked");
+        String orderinfo = request.getParameter("orderRecive") ;
+
         //打印显示
         System.out.println("createOrder(用户id，选中书name)):"+customerid+","+booknames);
-        //字符串处理
+
+        //书本条目字符串处理
         booknames = booknames.replace("\"", "");
-        //判断选择是否为空
-        if(booknames.equals("")){
-            return "noSelect" ;
-        }
         String[] items = booknames.split(",");
+
+        //订单联系信息字符串处理
+        orderinfo = orderinfo.replace("\"","");
+        String[] orderinfoArray = orderinfo.split(",");
+        System.out.println("订单联系人信息："+orderinfo);
+
         //Integer类型集合存储书本id
         List<Integer> intItems = new ArrayList<>();
         for(String s : items ){
             System.out.println(s);
             intItems.add(cartService.selectBookidByName(s));
         }
+
         //打印书本id集合
         System.out.println(intItems);
-        //结算封装到shopbook对象中
+        //结算的信息封装到shopbook对象集合dealList中
         List<ShopBook> dealList = new ArrayList<>();
         for (int i : intItems) {
             ShopBook shopBook = new ShopBook();
@@ -156,12 +165,47 @@ public class CartController {
         }
         System.out.println("-----------结算的书本："+dealList);
 
-        //存入model对象中
-        model.addAttribute("list",dealList);
-        //返回标志字段
-        return "makeSuccesss" ;
+        //订单对象集合
+        List<Order> orders = new ArrayList<>();
+
+        //把dealList集合中的shopbook对象补全信息，封装成order对象
+        for(ShopBook shopBook : dealList){
+            Order order = new Order();
+            order.setRecevername(orderinfoArray[0]);
+            order.setRecevertel(orderinfoArray[1]);
+            order.setReceveraddr(orderinfoArray[2]);
+            order.setMessage(orderinfoArray[3]);
+            order.setPaymethod(orderinfoArray[4]);
+            //获取和计算shopbook中的信息
+            order.setCustomerid(shopBook.getCustomerid());
+            order.setOrdermount(shopBook.getOrdermount());
+            order.setTotalprice(shopBook.getOrdermount()*shopBook.getPrice());
+            //生成订单号 orderid = {booid}#{ordermount}#{当前时间}#{cusid}
+            order.setOrderid(shopBook.getBookid()+"#"+shopBook.getOrdermount()
+                    +"#"+getCurrtTime()+"#"+shopBook.getCustomerid());
+
+            orders.add(order);
+        }
+
+        System.out.println(orders);
+
+
+        // 再对数据库中shopbook表记录删除，order表记录添加
+
+
+        //返回成功标志字段
+        return "makeSuccess" ;
     }
 
+    /**
+     * 获取当前系统时间
+     */
+    public String getCurrtTime(){
+        Date day=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(df.format(day));
+        return df.format(day);
+    }
 
     /**
      * 获取登陆用户的购物车清单3

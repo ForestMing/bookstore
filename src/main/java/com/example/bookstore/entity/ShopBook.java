@@ -18,13 +18,9 @@ public class ShopBook{
     }
 
     private Integer customerid ;
-
     private Integer bookid ;
-
     private Integer ordermount;
-
     private float price;
-
     private String ispaid;
 
     public Integer getCustomerid() {
