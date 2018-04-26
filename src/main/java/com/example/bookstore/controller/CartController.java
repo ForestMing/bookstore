@@ -6,6 +6,7 @@ import com.example.bookstore.entity.Order;
 import com.example.bookstore.entity.ShopBook;
 import com.example.bookstore.service.CartService;
 
+import com.example.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ import java.util.List;
 public class CartController {
     @Autowired
     private CartService cartService ;
+
+    @Autowired
+    private OrderService orderService ;
 
     //载入主页
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
@@ -91,7 +95,7 @@ public class CartController {
             shopBook.setBookid(i);
             int flag = 0;
             flag = cartService.deleteShopbook(shopBook);
-            if(flag == 0 ){
+            if(flag == 1 ){
                 System.out.println("CartController: 删除购物车记录"+customerid+","+i);
                 continue;
             }
@@ -180,10 +184,12 @@ public class CartController {
             order.setCustomerid(shopBook.getCustomerid());
             order.setOrdermount(shopBook.getOrdermount());
             order.setTotalprice(shopBook.getOrdermount()*shopBook.getPrice());
-            //生成订单号 orderid = {booid}#{ordermount}#{当前时间}#{cusid}
-            order.setOrderid(shopBook.getBookid()+"#"+shopBook.getOrdermount()
-                    +"#"+getCurrtTime()+"#"+shopBook.getCustomerid());
-
+            //生成订单号 orderid = {ordermount}#{当前时间}#{cusid}#{booid}
+            order.setOrderid(shopBook.getOrdermount() +"#"+getCurrtTime()+"#"
+                    +shopBook.getCustomerid()+"#"+shopBook.getBookid());
+            //其他信息
+            order.setPostmethod("平邮");
+            order.setMemo("---");
             orders.add(order);
         }
 
@@ -191,6 +197,24 @@ public class CartController {
 
 
         // 再对数据库中shopbook表记录删除，order表记录添加
+
+        for (ShopBook shopBook : dealList) {
+            //循环删除购物车记录
+            int flag = 0;
+            flag = cartService.deleteShopbook(shopBook);
+            if (flag == 1) {
+                System.out.println("CartController: 删除购物车记录" + shopBook);
+                continue;
+            }
+        }
+        for(Order order : orders){
+            int ok = 0 ;
+            ok = orderService.insertOrder(order) ;
+            if(ok == 1 ){
+                System.out.println("添加订单:"+order);
+                continue;
+            }
+        }
 
 
         //返回成功标志字段
@@ -202,7 +226,7 @@ public class CartController {
      */
     public String getCurrtTime(){
         Date day=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         System.out.println(df.format(day));
         return df.format(day);
     }

@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Order {
     private String orderid;
-    private Integer id;
     private int customerid ;
     private Date orderdate;
     private Integer ordermount;
@@ -22,7 +21,6 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderid='" + orderid + '\'' +
-                ", id=" + id +
                 ", customerid=" + customerid +
                 ", orderdate=" + orderdate +
                 ", ordermount=" + ordermount +
@@ -43,14 +41,6 @@ public class Order {
 
     public void setOrderid(String orderid) {
         this.orderid = orderid == null ? null : orderid.trim();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public int getCustomerid() {

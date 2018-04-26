@@ -4,4 +4,6 @@ import com.example.bookstore.entity.Order;
 
 public interface OrderMapper {
 
+    int insertOrder(Order order) ;
+
 }
