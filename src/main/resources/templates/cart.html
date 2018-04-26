@@ -131,6 +131,35 @@
 
 
 <script th:inline="javascript">
+    //结算购物车选中商品
+    $(function () {
+        $("#payButton").click(function (){
+            //当前用户id
+            var userid = /*[[${currentCus.customerid}]]*/ 'null';
+            //选定的商品Map
+            var nameMap = $("input[type='checkbox'][name='test']:checked").closest('tr').find('td:eq(2)').map(function(){return this.innerHTML}).get().join();
+            console.log(nameMap);
+
+
+            var json = JSON.stringify(nameMap);
+            console.log(json);
+
+            $.ajax({
+                url: "createOrder",
+                data: {"linked": json ,"cusid":userid},
+                type: "POST",
+                success: function (data) {
+                    if(data == "makeSuccesss"){
+                        location.href = "orders" ;
+                    }
+
+                },
+                error:function(error){alert(error);}
+            });
+
+        });
+    });
+
     //修改图书购物车数量
     $(function() {
        $(".btn-default").click(function () {

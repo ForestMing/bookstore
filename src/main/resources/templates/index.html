@@ -117,6 +117,14 @@
         <div class="col-xs-12">
 
             <div class="navbar-collapse">
+                <form class="navbar-form navbar-left">
+                    <marquee scrolldelay=0 onmouseout=this.start() onMouseOver=this.stop() scrollamount=2
+                             direction="left">
+                        <font color="#fffafa" size="4">
+                            逛书店是不可能逛的，这辈子都不可能逛的，买书就上拴拴网~o( =∩ω∩= )m
+                        </font>
+                    </marquee>
+                </form>
                 <form class="navbar-form navbar-right" id="searchForm" th:action="@{/byCondi}" method="post">
                     <div class="form-group">
                         <span class="glyphicon glyphicon-search"></span>
@@ -370,6 +378,7 @@
         });
     });
 
+    //点击条目的详情展示
     function ItemClick1(bookid){
         window.open('details?id='+bookid);
     }

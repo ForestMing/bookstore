@@ -24,11 +24,6 @@ public class HelloController {
         return "/details" ;
     }
 
-    @RequestMapping("/community")
-    public String community() {
-        return "/community";
-    }
-
 
     @RequestMapping("/test")
     public String test(Model model){
@@ -65,11 +60,6 @@ public class HelloController {
     @RequestMapping("/cart")
     public String cart() {
         return "/cart";
-    }
-
-    @RequestMapping("/orders")
-    public String orders() {
-        return "/orders";
     }
 
     @RequestMapping("/rankingList")

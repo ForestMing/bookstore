@@ -65,4 +65,10 @@
   </update>
 
 
+  <select id="selectShopbookByCusidAndBookid" parameterType="com.example.bookstore.entity.ShopBook" resultMap="ShopBookResultMap">
+    select *
+    from tb_shopbook s
+      where s.CustomerId =#{customerid} AND s.BookId = #{bookid}
+  </select>
+
 </mapper>

@@ -16,4 +16,6 @@ public interface CartService {
     int selectBookidByName(String name);
 
     int updateCartMount(ShopBook shopBook);
+
+    ShopBook selectShopbookByCusidAndBookid(ShopBook shopBook);
 }

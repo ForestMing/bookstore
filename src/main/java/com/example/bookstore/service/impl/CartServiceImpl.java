@@ -43,4 +43,9 @@ public class CartServiceImpl implements CartService {
     public int updateCartMount(ShopBook shopBook) {
         return shopBookMapper.updateCartMount(shopBook);
     }
+
+    @Override
+    public ShopBook selectShopbookByCusidAndBookid(ShopBook shopBook) {
+        return shopBookMapper.selectShopbookByCusidAndBookid(shopBook);
+    }
 }

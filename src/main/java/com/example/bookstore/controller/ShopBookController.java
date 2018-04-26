@@ -30,18 +30,18 @@ public class ShopBookController {
         if (session.getAttribute("loginid") == null) {
             System.out.println("ShopBookController:loginid == null ");
             //response.sendRedirect("login");
-            return "请注册/登陆！";
+            return "noLogin";
         }else {
             System.out.println("ShopBookController:loginid != null ");
             System.out.println(shopBook);
             int isAdded = isExistItem(shopBook);
             if(isAdded == 1 ){
                int updatesinfo =  updatenum(shopBook) ;
-               return "修改购物车数目成功！";
+               return "changeMountSuccess";
             }else {
                 int flag = shopBookService.addToCart(shopBook);
                 System.out.println("Flag:(1为成功)" + flag);
-                return "成功加入购物车！";
+                return "addCartSuccess";
             }
         }
     }

@@ -117,6 +117,50 @@ public class CartController {
 
     }
 
+    /**
+     * 购物车选定商品结算
+     */
+    @RequestMapping(value="createOrder",method = RequestMethod.POST)
+    public @ResponseBody String makeOrder(HttpServletRequest request,Model model )  throws Exception{
+        System.out.println("createOrder Controller-------------------------------------------");
+        //获取json报文中的用户id和被选中的书本id集合
+        int customerid = Integer.parseInt( request.getParameter("cusid") );
+        String booknames = request.getParameter("linked");
+        //打印显示
+        System.out.println("createOrder(用户id，选中书name)):"+customerid+","+booknames);
+        //字符串处理
+        booknames = booknames.replace("\"", "");
+        //判断选择是否为空
+        if(booknames.equals("")){
+            return "noSelect" ;
+        }
+        String[] items = booknames.split(",");
+        //Integer类型集合存储书本id
+        List<Integer> intItems = new ArrayList<>();
+        for(String s : items ){
+            System.out.println(s);
+            intItems.add(cartService.selectBookidByName(s));
+        }
+        //打印书本id集合
+        System.out.println(intItems);
+        //结算封装到shopbook对象中
+        List<ShopBook> dealList = new ArrayList<>();
+        for (int i : intItems) {
+            ShopBook shopBook = new ShopBook();
+            shopBook.setCustomerid(customerid);
+            shopBook.setBookid(i);
+            //获取shopbook的cusid和bookid在数据库中获取完整记录
+            shopBook = cartService.selectShopbookByCusidAndBookid(shopBook);
+            //添加到结算列表中
+            dealList.add(shopBook) ;
+        }
+        System.out.println("-----------结算的书本："+dealList);
+
+        //存入model对象中
+        model.addAttribute("list",dealList);
+        //返回标志字段
+        return "makeSuccesss" ;
+    }
 
 
     /**
