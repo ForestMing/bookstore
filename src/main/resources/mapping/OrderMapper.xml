@@ -31,4 +31,10 @@
     )
   </insert>
 
+  <select id="selectAllOrderByCusid" parameterType="int" resultMap="OrderResultMap">
+    select *
+      from tb_order o
+      where o.CustomerId = #{cusid} ;
+  </select>
+
 </mapper>

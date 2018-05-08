@@ -2,6 +2,7 @@ package com.example.bookstore.controller;
 
 
 import com.example.bookstore.entity.Customer;
+import com.example.bookstore.entity.Order;
 import com.example.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
@@ -33,6 +34,12 @@ public class OrderController {
             cus.setCustomername(name);
             //封装到customer对象中用于前台展示
             model.addAttribute("currentCus",cus);
+
+            //得到用户订单信息
+            List<Order> orders = orderService.selectAllOrderByCusid(uid);
+            //model中添加订单列表
+            System.out.println(orders);
+            model.addAttribute("lists",orders);
 
             return "orders";
         }else{

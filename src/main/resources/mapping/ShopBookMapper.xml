@@ -71,4 +71,10 @@
       where s.CustomerId =#{customerid} AND s.BookId = #{bookid}
   </select>
 
+  <select id="selectBookStoremountById" parameterType="int" resultType="int">
+    select  b.BookStoremount
+    from tb_bookinfo b
+      where b.BookId = #{bookid} ;
+  </select>
+
 </mapper>

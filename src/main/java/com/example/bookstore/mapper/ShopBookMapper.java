@@ -24,4 +24,6 @@ public interface ShopBookMapper {
     int updateCartMount(ShopBook shopBook);
 
     ShopBook selectShopbookByCusidAndBookid(ShopBook shopBook);
+
+    int selectBookStoremountById(int bookid);
 }

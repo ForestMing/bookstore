@@ -29,7 +29,10 @@ public class ShopBookServiceImpl implements ShopBookService{
         return shopBookMapper.updateMount(shopBook);
     }
 
-
+    @Override
+    public int selectBookStoremountById(int bookid) {
+        return shopBookMapper.selectBookStoremountById(bookid);
+    }
 
 
 }

@@ -34,6 +34,13 @@ public class ShopBookController {
         }else {
             System.out.println("ShopBookController:loginid != null ");
             System.out.println(shopBook);
+            //判断加入数量是否超过库存
+            int totalmount = shopBookService.selectBookStoremountById(shopBook.getBookid());
+            System.out.println("-------该书本总库存："+totalmount);
+            if(totalmount < shopBook.getOrdermount()){
+                return "overMaxMount" ;
+            }
+            //判断是否已存在对于购物车条目
             int isAdded = isExistItem(shopBook);
             if(isAdded == 1 ){
                int updatesinfo =  updatenum(shopBook) ;

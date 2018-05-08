@@ -11,6 +11,7 @@ public interface ShopBookService {
 
     int updateMount(ShopBook shopBook);
 
+    int selectBookStoremountById(int bookid);
 
 
 }
